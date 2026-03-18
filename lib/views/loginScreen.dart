@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/get_core.dart';
+import 'package:n_gauge_apptask/views/b2bBuyerLoginScreen.dart';
 import 'package:n_gauge_apptask/views/exibitorLoginScreen.dart';
+import 'package:n_gauge_apptask/views/iotLoginScreen.dart';
+import 'package:n_gauge_apptask/views/visitorLoginScreen.dart';
 
 class Loginscreen extends StatelessWidget {
   const Loginscreen({super.key});
@@ -37,7 +39,7 @@ class Loginscreen extends StatelessWidget {
                     ),
                   ),
                   child: Text(
-                    "EXIBITOR LOGIN",
+                    "EXHIBITOR LOGIN",
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
@@ -48,7 +50,9 @@ class Loginscreen extends StatelessWidget {
                 width: double.infinity,
                 height: 50,
                 child: OutlinedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.to(Visitorloginscreen());
+                  },
                   style: OutlinedButton.styleFrom(
                     backgroundColor: const Color.fromARGB(255, 22, 41, 163),
                     shape: RoundedRectangleBorder(
@@ -67,7 +71,9 @@ class Loginscreen extends StatelessWidget {
                 height: 50,
                 width: double.infinity,
                 child: OutlinedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.to(B2BBuyerLoginScreen());
+                  },
                   style: OutlinedButton.styleFrom(
                     backgroundColor: const Color.fromARGB(255, 55, 157, 59),
                     shape: RoundedRectangleBorder(
@@ -86,7 +92,9 @@ class Loginscreen extends StatelessWidget {
                 height: 50,
                 width: double.infinity,
                 child: OutlinedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.to(Iotloginscreen());
+                  },
                   style: OutlinedButton.styleFrom(
                     backgroundColor: const Color.fromARGB(255, 208, 59, 235),
                     shape: RoundedRectangleBorder(

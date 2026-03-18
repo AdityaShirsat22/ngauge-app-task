@@ -2,11 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:n_gauge_apptask/views/homeScreen.dart';
 
-class Exibitorloginscreen extends StatelessWidget {
-  Exibitorloginscreen({super.key});
+class Dbsmloginscreen extends StatefulWidget {
+  Dbsmloginscreen({super.key});
+
+  @override
+  State<Dbsmloginscreen> createState() => _VisitorloginscreenState();
+}
+
+class _VisitorloginscreenState extends State<Dbsmloginscreen> {
   var orange = Color.fromARGB(255, 255, 109, 24);
+
   var blue = const Color.fromARGB(255, 22, 41, 163);
+
   var green = const Color.fromARGB(255, 55, 157, 59);
+
+  bool isHidden = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,12 +36,12 @@ class Exibitorloginscreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             SizedBox(height: 30),
             Center(
               child: Text(
-                "Exihibitor Login",
+                "Enter your DBSM credentails",
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
@@ -39,7 +50,7 @@ class Exibitorloginscreen extends StatelessWidget {
               cursorColor: Colors.blue,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
-                hint: Text("Enter Email Id"),
+                hint: Text("Enter your Delegate Id "),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                   borderSide: BorderSide(color: Colors.black),
@@ -47,39 +58,57 @@ class Exibitorloginscreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 20),
+            TextField(
+              obscureText: isHidden,
+              cursorColor: Colors.blue,
+              keyboardType: TextInputType.text,
+              decoration: InputDecoration(
+                hint: Text("Enter Your Password "),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(color: Colors.black),
+                ),
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    isHidden ? Icons.visibility_off : Icons.visibility,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      isHidden = !isHidden;
+                    });
+                  },
+                ),
+              ),
+            ),
+            SizedBox(height: 5),
+            TextButton(
+              onPressed: () {},
+              child: Text(
+                "Forget password?",
+                style: TextStyle(color: Colors.lightBlue[600]),
+              ),
+            ),
+            SizedBox(height: 20),
             SizedBox(
               width: double.infinity,
               height: 50,
               child: OutlinedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.snackbar(
+                    'Sucessfull',
+                    "Login done",
+                    snackPosition: SnackPosition.BOTTOM,
+                    margin: EdgeInsets.all(10),
+                  );
+                },
                 style: OutlinedButton.styleFrom(
                   backgroundColor: blue,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(0),
                   ),
                 ),
-                child: Text("Submit", style: TextStyle(color: Colors.white)),
+                child: Text("Login", style: TextStyle(color: Colors.white)),
               ),
-            ),
-            SizedBox(height: 20),
-            Text(
-              "NOTE :-",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-            ),
-            SizedBox(height: 20),
-            Text(
-              "- Please use the email ID that was submitted by your organization for your Exihibitor Badge registration",
-              style: TextStyle(fontSize: 17),
-            ),
-            SizedBox(height: 2),
-            Text(
-              "-You will recieve your One Time Login Code on your registered email.",
-              style: TextStyle(fontSize: 17),
-            ),
-            SizedBox(height: 2),
-            Text(
-              "- If your email is not registered then please contact you team responsible for submitting the data for 'Exhibitor Badges'",
-              style: TextStyle(fontSize: 17),
             ),
           ],
         ),
