@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/get_core.dart';
+import 'package:n_gauge_apptask/views/exibitorLoginScreen.dart';
 
 class Loginscreen extends StatelessWidget {
   const Loginscreen({super.key});
@@ -18,12 +21,15 @@ class Loginscreen extends StatelessWidget {
             children: [
               Text("Select Your Login Option", style: TextStyle(fontSize: 20)),
 
-              SizedBox(height: 10),
+              SizedBox(height: 12),
 
               SizedBox(
                 width: double.infinity,
+                height: 50,
                 child: OutlinedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.to(() => Exibitorloginscreen());
+                  },
                   style: OutlinedButton.styleFrom(
                     backgroundColor: const Color.fromARGB(255, 255, 109, 24),
                     shape: RoundedRectangleBorder(
@@ -37,9 +43,10 @@ class Loginscreen extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: 10),
+              SizedBox(height: 12),
               SizedBox(
                 width: double.infinity,
+                height: 50,
                 child: OutlinedButton(
                   onPressed: () {},
                   style: OutlinedButton.styleFrom(
@@ -55,8 +62,9 @@ class Loginscreen extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: 10),
+              SizedBox(height: 12),
               SizedBox(
+                height: 50,
                 width: double.infinity,
                 child: OutlinedButton(
                   onPressed: () {},
@@ -73,8 +81,9 @@ class Loginscreen extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: 10),
+              SizedBox(height: 12),
               SizedBox(
+                height: 50,
                 width: double.infinity,
                 child: OutlinedButton(
                   onPressed: () {},

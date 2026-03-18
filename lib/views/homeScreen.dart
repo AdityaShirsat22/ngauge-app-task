@@ -1,9 +1,11 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/utils.dart';
 import 'package:n_gauge_apptask/views/loginScreen.dart';
+import 'package:n_gauge_apptask/views/qrScreen.dart';
 
+// ignore: must_be_immutable
 class Homescreen extends StatelessWidget {
   Homescreen({super.key});
 
@@ -19,7 +21,7 @@ class Homescreen extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              Get.to(() => Loginscreen());
+              Get.to(() => Qrscreen());
             },
             icon: Icon(Icons.qr_code, color: Colors.white, size: 28),
           ),
@@ -53,7 +55,18 @@ class Homescreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Image(image: AssetImage('assets/image1.jpeg')),
+            CarouselSlider(
+              options: CarouselOptions(
+                height: 150,
+                autoPlay: true,
+                autoPlayInterval: Duration(seconds: 3),
+                viewportFraction: 1,
+              ),
+              items: [
+                Image(image: AssetImage("assets/image1.jpeg")),
+                Image(image: AssetImage("assets/image2.jpeg")),
+              ],
+            ),
             ExpansionTile(
               title: Text(
                 "PLAN YOUR VISIT",
@@ -80,6 +93,7 @@ class Homescreen extends StatelessWidget {
                       ),
                       Divider(color: orange, thickness: 0.1),
                       ListTile(
+                        minTileHeight: 20,
                         leading: Icon(
                           Icons.people,
                           color: Colors.orange,
@@ -190,7 +204,7 @@ class Homescreen extends StatelessWidget {
                         trailing: Icon(Icons.arrow_forward_ios, size: 20),
                         onTap: () {},
                       ),
-                      Divider(color: orange, thickness: 0.1),
+                      Divider(color: blue, thickness: 0.1),
                       ListTile(
                         leading: Icon(
                           Icons.support_agent,
@@ -201,7 +215,7 @@ class Homescreen extends StatelessWidget {
                         trailing: Icon(Icons.arrow_forward_ios, size: 20),
                         onTap: () {},
                       ),
-                      Divider(color: orange, thickness: 0.1),
+                      Divider(color: blue, thickness: 0.1),
                       ListTile(
                         leading: Icon(
                           Icons.feedback_sharp,
@@ -226,8 +240,40 @@ class Homescreen extends StatelessWidget {
               children: [
                 Container(
                   color: Colors.white,
-                  child: Column(children: [
-                      
+                  child: Column(
+                    children: [
+                      ListTile(
+                        leading: Icon(
+                          Icons.calendar_month,
+                          color: green,
+                          size: 30,
+                        ),
+                        title: Text("About Event"),
+                        trailing: Icon(Icons.arrow_forward_ios, size: 20),
+                        onTap: () {},
+                      ),
+                      Divider(color: green, thickness: 0.3),
+                      ListTile(
+                        leading: Icon(
+                          Icons.meeting_room,
+                          color: green,
+                          size: 30,
+                        ),
+                        title: Text("Organizers"),
+                        trailing: Icon(Icons.arrow_forward_ios, size: 20),
+                        onTap: () {},
+                      ),
+                      Divider(color: green, thickness: 0.3),
+                      ListTile(
+                        leading: Icon(
+                          Icons.attach_money,
+                          color: green,
+                          size: 30,
+                        ),
+                        title: Text("Sponser"),
+                        trailing: Icon(Icons.arrow_forward_ios, size: 20),
+                        onTap: () {},
+                      ),
                     ],
                   ),
                 ),
