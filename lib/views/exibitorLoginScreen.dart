@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Exibitorloginscreen extends StatelessWidget {
   Exibitorloginscreen({super.key});
   var orange = Color.fromARGB(255, 255, 109, 24);
+  var blue = const Color.fromARGB(255, 22, 41, 163);
+  var green = const Color.fromARGB(255, 55, 157, 59);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,17 +14,64 @@ class Exibitorloginscreen extends StatelessWidget {
         backgroundColor: orange,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(20),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 30),
             Center(
-              child: Text("Exibitor Login", style: TextStyle(fontSize: 25))
+              child: Text(
+                "Exihibitor Login",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
             ),
-            TextField(autofocus: true),
             SizedBox(height: 20),
-            OutlinedButton(onPressed: () {}, child: Text("Submit")),
-            Text("NOTE :-"),
+            TextField(
+              cursorColor: Colors.blue,
+              keyboardType: TextInputType.emailAddress,
+              decoration: InputDecoration(
+                hint: Text("Enter Email Id"),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(color: Colors.black),
+                ),
+              ),
+            ),
+            SizedBox(height: 20),
+            SizedBox(
+              width: double.infinity,
+              height: 50,
+              child: OutlinedButton(
+                onPressed: () {},
+                style: OutlinedButton.styleFrom(
+                  backgroundColor: blue,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(0),
+                  ),
+                ),
+                child: Text("Submit", style: TextStyle(color: Colors.white)),
+              ),
+            ),
+            SizedBox(height: 20),
+            Text(
+              "NOTE :-",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            ),
+            SizedBox(height: 20),
+            Text(
+              "- Please use the email ID that was submitted by your organization for your Exihibitor Badge registration",
+              style: TextStyle(fontSize: 17),
+            ),
+            SizedBox(height: 2),
+            Text(
+              "-You will recieve your One Time Login Code on your registered email.",
+              style: TextStyle(fontSize: 17),
+            ),
+            SizedBox(height: 2),
+            Text(
+              "- If your email is not registered then please contact you team responsible for submitting the data for 'Exhibitor Badges'",
+              style: TextStyle(fontSize: 17),
+            ),
           ],
         ),
       ),

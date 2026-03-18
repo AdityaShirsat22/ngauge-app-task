@@ -22,7 +22,7 @@ class Qrscreen extends StatelessWidget {
                 OutlinedButton(
                   onPressed: () {},
                   style: OutlinedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 255, 109, 24),
+                    backgroundColor: orange,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(0),
                     ),
