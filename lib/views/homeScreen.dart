@@ -2,15 +2,23 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/utils.dart';
+import 'package:n_gauge_apptask/views/exhibitorListScreen.dart';
 import 'package:n_gauge_apptask/views/loginScreen.dart';
 import 'package:n_gauge_apptask/views/qrScreen.dart';
 
 // ignore: must_be_immutable
-class Homescreen extends StatelessWidget {
-  Homescreen({super.key});
+class Homescreen extends StatefulWidget {
+  const Homescreen({super.key});
 
+  @override
+  State<Homescreen> createState() => _HomescreenState();
+}
+
+class _HomescreenState extends State<Homescreen> {
   var orange = Color.fromARGB(255, 255, 109, 24);
+
   var blue = const Color.fromARGB(255, 22, 41, 163);
+
   var green = const Color.fromARGB(255, 55, 157, 59);
 
   @override
@@ -89,7 +97,9 @@ class Homescreen extends StatelessWidget {
                         ),
                         title: Text("My Dashboard"),
                         trailing: Icon(Icons.arrow_forward_ios, size: 20),
-                        onTap: () {},
+                        onTap: () {
+                          Get.to(() => Loginscreen());
+                        },
                       ),
                       Divider(color: orange, thickness: 0.1),
                       ListTile(
@@ -99,8 +109,11 @@ class Homescreen extends StatelessWidget {
                           color: Colors.orange,
                           size: 30,
                         ),
-                        title: Text("Exhibitors"),
                         trailing: Icon(Icons.arrow_forward_ios, size: 20),
+                        title: Text("Exhibitors"),
+                        onTap: () {
+                          Get.to(Exhibitorlistscreen());
+                        },
                       ),
                       Divider(color: orange, thickness: 0.1),
                       ListTile(

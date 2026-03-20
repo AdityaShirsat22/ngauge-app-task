@@ -73,7 +73,7 @@ class Exibitorloginscreen extends StatelessWidget {
             ),
             SizedBox(height: 2),
             Text(
-              "-You will recieve your One Time Login Code on your registered email.",
+              "- You will recieve your One Time Login Code on your registered email.",
               style: TextStyle(fontSize: 17),
             ),
             SizedBox(height: 2),

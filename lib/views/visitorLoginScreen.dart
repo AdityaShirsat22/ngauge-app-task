@@ -4,7 +4,7 @@ import 'package:get/state_manager.dart';
 import 'package:n_gauge_apptask/views/homeScreen.dart';
 
 class Visitorloginscreen extends StatefulWidget {
-  Visitorloginscreen({super.key});
+  const Visitorloginscreen({super.key});
 
   @override
   State<Visitorloginscreen> createState() => _VisitorloginscreenState();
