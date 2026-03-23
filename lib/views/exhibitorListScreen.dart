@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
+import 'package:n_gauge_apptask/views/filterScreenExibitorList.dart';
 
 class Exhibitorlistscreen extends StatefulWidget {
   const Exhibitorlistscreen({super.key});
@@ -44,7 +46,13 @@ class _ExhibtorlistscreenState extends State<Exhibitorlistscreen> {
                 Column(
                   children: [
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.bottomSheet(
+                          Filterscreenexibitorlist(),
+                          isScrollControlled: true,
+                          backgroundColor: Colors.transparent,
+                        );
+                      },
                       icon: Icon(
                         Icons.filter_alt,
                         size: 30,
