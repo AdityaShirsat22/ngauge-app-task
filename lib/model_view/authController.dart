@@ -28,24 +28,21 @@ class AuthController extends GetxController {
     }
   }
 
-
   Future<void> exhibitorLogin(String email) async {
-  try {
-    isLoading.value = true;
-    final response = await _service.exhibitorLogin(email: email);
-    final data = response.data;
-    print("EXHIBITOR RESPONSE: $data"); add 
-    if (data["Code"] == 1) {
-      Get.snackbar("Success", "Login Successful");
-    } else {
-      Get.snackbar("Error", data["Message"] ?? "Login Failed");
+    try {
+      isLoading.value = true;
+      final response = await _service.exhibitorLogin(email: email);
+      final data = response.data;
+      print("EXHIBITOR RESPONSE: $data");
+      if (data["Code"] == 1) {
+        Get.snackbar("Success", "Login Successful");
+      } else {
+        Get.snackbar("Error", data["Message"] ?? "Login Failed");
+      }
+    } catch (e) {
+      Get.snackbar("Error", e.toString());
+    } finally {
+      isLoading.value = false;
     }
-  } catch (e) {
-    Get.snackbar("Error", e.toString());
-  } finally {
-    isLoading.value = false;
   }
-}
-
-
 }
