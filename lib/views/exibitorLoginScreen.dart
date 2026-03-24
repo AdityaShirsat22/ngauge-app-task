@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:n_gauge_apptask/model_view/authController.dart';
 import 'package:n_gauge_apptask/views/homeScreen.dart';
 
+// ignore: must_be_immutable
 class Exibitorloginscreen extends StatelessWidget {
   Exibitorloginscreen({super.key});
+
+  AuthController controller = Get.put(AuthController());
+
+  TextEditingController emailController = TextEditingController();
+
   var orange = Color.fromARGB(255, 255, 109, 24);
   var blue = const Color.fromARGB(255, 22, 41, 163);
   var green = const Color.fromARGB(255, 55, 157, 59);
@@ -36,6 +43,7 @@ class Exibitorloginscreen extends StatelessWidget {
             ),
             SizedBox(height: 20),
             TextField(
+              controller: emailController,
               cursorColor: Colors.blue,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
@@ -51,7 +59,15 @@ class Exibitorloginscreen extends StatelessWidget {
               width: double.infinity,
               height: 50,
               child: OutlinedButton(
-                onPressed: () {},
+                onPressed: () {
+                  String email = emailController.text.trim();
+
+                  if (email.isEmpty) {
+                    Get.snackbar("Error", "Enter email");
+                    return;
+                  }
+                  controller.exhibitorLogin(email);
+                },
                 style: OutlinedButton.styleFrom(
                   backgroundColor: blue,
                   shape: RoundedRectangleBorder(

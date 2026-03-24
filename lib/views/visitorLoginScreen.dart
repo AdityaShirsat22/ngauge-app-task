@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/state_manager.dart';
+import 'package:n_gauge_apptask/model_view/authController.dart';
 import 'package:n_gauge_apptask/views/homeScreen.dart';
 
 class Visitorloginscreen extends StatefulWidget {
@@ -11,11 +11,14 @@ class Visitorloginscreen extends StatefulWidget {
 }
 
 class _VisitorloginscreenState extends State<Visitorloginscreen> {
+  final controller = Get.put(AuthController());
+
   var orange = Color.fromARGB(255, 255, 109, 24);
-
   var blue = const Color.fromARGB(255, 22, 41, 163);
-
   var green = const Color.fromARGB(255, 55, 157, 59);
+
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   bool isHidden = true;
 
@@ -48,6 +51,7 @@ class _VisitorloginscreenState extends State<Visitorloginscreen> {
             ),
             SizedBox(height: 20),
             TextField(
+              controller: usernameController,
               cursorColor: Colors.blue,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
@@ -60,6 +64,7 @@ class _VisitorloginscreenState extends State<Visitorloginscreen> {
             ),
             SizedBox(height: 20),
             TextField(
+              controller: passwordController,
               obscureText: isHidden,
               cursorColor: Colors.blue,
               keyboardType: TextInputType.text,
@@ -95,11 +100,15 @@ class _VisitorloginscreenState extends State<Visitorloginscreen> {
               height: 50,
               child: OutlinedButton(
                 onPressed: () {
-                  Get.snackbar(
-                    'Sucessfull',
-                    "Login done",
-                    snackPosition: SnackPosition.BOTTOM,
-                    margin: EdgeInsets.all(10),
+                  if (usernameController.text.isEmpty ||
+                      passwordController.text.isEmpty) {
+                    Get.snackbar("Error", "Enter all fields");
+                    return;
+                  }
+
+                  controller.visitorlogin(
+                    usernameController.text,
+                    passwordController.text,
                   );
                 },
                 style: OutlinedButton.styleFrom(

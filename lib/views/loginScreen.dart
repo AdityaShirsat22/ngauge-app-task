@@ -6,7 +6,7 @@ import 'package:n_gauge_apptask/views/iotLoginScreen.dart';
 import 'package:n_gauge_apptask/views/visitorLoginScreen.dart';
 
 class Loginscreen extends StatelessWidget {
-  const Loginscreen({super.key});
+  Loginscreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +51,7 @@ class Loginscreen extends StatelessWidget {
                 height: 50,
                 child: OutlinedButton(
                   onPressed: () {
-                    Get.to(Visitorloginscreen());
+                    Get.to(() => Visitorloginscreen());
                   },
                   style: OutlinedButton.styleFrom(
                     backgroundColor: const Color.fromARGB(255, 22, 41, 163),

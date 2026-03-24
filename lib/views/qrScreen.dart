@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class Qrscreen extends StatelessWidget {
   Qrscreen({super.key});
   var orange = Color.fromARGB(255, 255, 109, 24);
