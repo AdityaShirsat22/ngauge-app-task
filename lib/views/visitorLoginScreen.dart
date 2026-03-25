@@ -93,7 +93,7 @@ class _VisitorloginscreenState extends State<Visitorloginscreen> {
                 String pass = passwordController.text.trim();
 
                 if (id.isEmpty || pass.isEmpty) {
-                  Get.snackbar("error", "Eenter all fields");
+                  Get.snackbar("error", "Enter all fields");
                   return;
                 }
                 controller.visitorForgetPassword(id, pass);

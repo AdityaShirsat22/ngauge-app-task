@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:n_gauge_apptask/model_view/authController.dart';
 import 'package:n_gauge_apptask/views/homeScreen.dart';
 
 class Dbsmloginscreen extends StatefulWidget {
@@ -15,6 +16,10 @@ class _VisitorloginscreenState extends State<Dbsmloginscreen> {
   var blue = const Color.fromARGB(255, 22, 41, 163);
 
   var green = const Color.fromARGB(255, 55, 157, 59);
+
+  AuthController controller = AuthController();
+  TextEditingController username = TextEditingController();
+  TextEditingController password = TextEditingController();
 
   bool isHidden = true;
 
@@ -47,6 +52,7 @@ class _VisitorloginscreenState extends State<Dbsmloginscreen> {
             ),
             SizedBox(height: 20),
             TextField(
+              controller: username,
               cursorColor: Colors.blue,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
@@ -59,6 +65,7 @@ class _VisitorloginscreenState extends State<Dbsmloginscreen> {
             ),
             SizedBox(height: 20),
             TextField(
+              controller: password,
               obscureText: isHidden,
               cursorColor: Colors.blue,
               keyboardType: TextInputType.text,
@@ -94,12 +101,14 @@ class _VisitorloginscreenState extends State<Dbsmloginscreen> {
               height: 50,
               child: OutlinedButton(
                 onPressed: () {
-                  Get.snackbar(
-                    'Sucessfull',
-                    "Login done",
-                    snackPosition: SnackPosition.BOTTOM,
-                    margin: EdgeInsets.all(10),
-                  );
+                  String id = username.text.trim();
+                  String pass = password.text.trim();
+
+                  if (id.isEmpty || pass.isEmpty) {
+                    Get.snackbar("Error", "enter all fields");
+                    return;
+                  }
+                  controller.dbsmLogin(id, pass);
                 },
                 style: OutlinedButton.styleFrom(
                   backgroundColor: blue,

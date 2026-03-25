@@ -47,4 +47,67 @@ class AuthService {
     );
     return response;
   }
+
+  //DBMSLogin
+  Future<Response> dbsmlogin({
+    required String userId,
+    required String password,
+  }) async {
+    try {
+      final response = await _dio.post(
+        ApiConstants.visitorLogin,
+        queryParameters: {
+          "UserID": userId,
+          "password": password,
+          "DeviceId": "123456",
+          "blIOS": "false",
+        },
+      );
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  //RBMSLogin
+  Future<Response> rbsmlogin({
+    required String userId,
+    required String password,
+  }) async {
+    try {
+      final response = await _dio.post(
+        ApiConstants.visitorLogin,
+        queryParameters: {
+          "UserID": userId,
+          "password": password,
+          "DeviceId": "123456",
+          "blIOS": "false",
+        },
+      );
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  //iotLogin
+  Future<Response> iotlogin({
+    required String userId,
+    required String password,
+  }) async {
+    try {
+      final response = await _dio.post(
+        ApiConstants.visitorLogin,
+        queryParameters: {
+          "UserID": userId,
+          "password": password,
+          "DeviceId": "123456",
+          "blIOS": "false",
+        },
+      );
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

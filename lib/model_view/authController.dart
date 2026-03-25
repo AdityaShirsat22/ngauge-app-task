@@ -68,4 +68,70 @@ class AuthController extends GetxController {
       isLoading.value = false;
     }
   }
+
+  Future<void> dbsmLogin(String user, String pass) async {
+    try {
+      isLoading.value = true;
+      final response = await _service.dbsmlogin(
+        userId: user,
+        password: pass,
+      );
+      final data = response.data;
+      print("API RESPONSE: $data");
+      if (data["Code"] == 1) {
+        Get.snackbar("Success", "Login Successful");
+      } else {
+        Get.snackbar("Error", data["Message"]);
+      }
+    } catch (e) {
+      Get.snackbar("Error", e.toString());
+      print(e.toString());
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+   Future<void> rbsmLogin(String user, String pass) async {
+    try {
+      isLoading.value = true;
+      final response = await _service.rbsmlogin(
+        userId: user,
+        password: pass,
+      );
+      final data = response.data;
+      print("API RESPONSE: $data");
+      if (data["Code"] == 1) {
+        Get.snackbar("Success", "Login Successful");
+      } else {
+        Get.snackbar("Error", data["Message"]);
+      }
+    } catch (e) {
+      Get.snackbar("Error", e.toString());
+      print(e.toString());
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+   Future<void> iotLogin(String user, String pass) async {
+    try {
+      isLoading.value = true;
+      final response = await _service.iotlogin(
+        userId: user,
+        password: pass,
+      );
+      final data = response.data;
+      print("API RESPONSE: $data");
+      if (data["Code"] == 1) {
+        Get.snackbar("Success", "Login Successful");
+      } else {
+        Get.snackbar("Error", data["Message"]);
+      }
+    } catch (e) {
+      Get.snackbar("Error", e.toString());
+      print(e.toString());
+    } finally {
+      isLoading.value = false;
+    }
+  }
 }
