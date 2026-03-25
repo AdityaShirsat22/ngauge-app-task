@@ -88,7 +88,16 @@ class _VisitorloginscreenState extends State<Visitorloginscreen> {
             ),
             SizedBox(height: 5),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                String id = usernameController.text.trim();
+                String pass = passwordController.text.trim();
+
+                if (id.isEmpty || pass.isEmpty) {
+                  Get.snackbar("error", "Eenter all fields");
+                  return;
+                }
+                controller.visitorForgetPassword(id, pass);
+              },
               child: Text(
                 "Forget password?",
                 style: TextStyle(color: Colors.lightBlue[600]),

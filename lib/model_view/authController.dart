@@ -45,4 +45,27 @@ class AuthController extends GetxController {
       isLoading.value = false;
     }
   }
+
+  Future<void> visitorForgetPassword(String inId, String password) async {
+    try {
+      isLoading.value = true;
+      final response = await _service.visitorForgetPassword(
+        inId: inId,
+        password: password,
+      );
+
+      final data = response.data;
+      print("FORGOT PASSWORD RESPONSE: $data");
+
+      if (data["Code"] == 1) {
+        Get.snackbar("Success", data["Message"] ?? "Password Updated");
+      } else {
+        Get.snackbar("Error", data["Message"] ?? "Failed");
+      }
+    } catch (e) {
+      Get.snackbar("Error", e.toString());
+    } finally {
+      isLoading.value = false;
+    }
+  }
 }
