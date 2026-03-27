@@ -112,7 +112,7 @@ class _HomescreenState extends State<Homescreen> {
                         trailing: Icon(Icons.arrow_forward_ios, size: 20),
                         title: Text("Exhibitors"),
                         onTap: () {
-                          Get.to(Exhibitorlistscreen());
+                          Get.to(() => Exhibitorlistscreen());
                         },
                       ),
                       Divider(color: orange, thickness: 0.1),

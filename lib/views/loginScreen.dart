@@ -72,7 +72,7 @@ class Loginscreen extends StatelessWidget {
                 width: double.infinity,
                 child: OutlinedButton(
                   onPressed: () {
-                    Get.to(B2BBuyerLoginScreen());
+                    Get.to(() => B2BBuyerLoginScreen());
                   },
                   style: OutlinedButton.styleFrom(
                     backgroundColor: const Color.fromARGB(255, 55, 157, 59),
@@ -93,7 +93,7 @@ class Loginscreen extends StatelessWidget {
                 width: double.infinity,
                 child: OutlinedButton(
                   onPressed: () {
-                    Get.to(Iotloginscreen());
+                    Get.to(() => Iotloginscreen());
                   },
                   style: OutlinedButton.styleFrom(
                     backgroundColor: const Color.fromARGB(255, 208, 59, 235),

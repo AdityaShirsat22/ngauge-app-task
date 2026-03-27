@@ -9,7 +9,8 @@ class Exibitorloginscreen extends StatelessWidget {
 
   AuthController controller = Get.put(AuthController());
 
-  TextEditingController emailController = TextEditingController();
+  final _formkey = GlobalKey<FormState>();
+  final TextEditingController emailController = TextEditingController();
 
   var orange = Color.fromARGB(255, 255, 109, 24);
   var blue = const Color.fromARGB(255, 22, 41, 163);
@@ -42,16 +43,25 @@ class Exibitorloginscreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 20),
-            TextField(
-              controller: emailController,
-              cursorColor: Colors.blue,
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                hint: Text("Enter Email Id"),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide(color: Colors.black),
+            Form(
+              key: _formkey,
+              child: TextFormField(
+                controller: emailController,
+                cursorColor: Colors.blue,
+                keyboardType: TextInputType.emailAddress,
+                decoration: InputDecoration(
+                  hint: Text("Enter Email Id"),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(color: Colors.black),
+                  ),
                 ),
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return "* required";
+                  }
+                  return null;
+                },
               ),
             ),
             SizedBox(height: 20),
@@ -60,10 +70,10 @@ class Exibitorloginscreen extends StatelessWidget {
               height: 50,
               child: OutlinedButton(
                 onPressed: () {
+                  if (_formkey.currentState?.validate() ?? false) {}
                   String email = emailController.text.trim();
 
                   if (email.isEmpty) {
-                    Get.snackbar("Error", "Enter email");
                     return;
                   }
                   controller.exhibitorLogin(email);

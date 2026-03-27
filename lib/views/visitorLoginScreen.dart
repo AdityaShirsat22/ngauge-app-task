@@ -19,6 +19,7 @@ class _VisitorloginscreenState extends State<Visitorloginscreen> {
 
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   bool isHidden = true;
 
@@ -50,40 +51,61 @@ class _VisitorloginscreenState extends State<Visitorloginscreen> {
               ),
             ),
             SizedBox(height: 20),
-            TextField(
-              controller: usernameController,
-              cursorColor: Colors.blue,
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                hint: Text("Enter Visitor ID / Email "),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide(color: Colors.black),
-                ),
-              ),
-            ),
-            SizedBox(height: 20),
-            TextField(
-              controller: passwordController,
-              obscureText: isHidden,
-              cursorColor: Colors.blue,
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                hint: Text("Enter Your Password "),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide(color: Colors.black),
-                ),
-                suffixIcon: IconButton(
-                  icon: Icon(
-                    isHidden ? Icons.visibility_off : Icons.visibility,
+            Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  TextFormField(
+                    controller: usernameController,
+                    cursorColor: Colors.blue,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: InputDecoration(
+                      hint: Text("Enter Visitor ID / Email "),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(color: Colors.black),
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.trim().isEmpty) {
+                        return "* Required";
+                      }
+                      return null;
+                    },
                   ),
-                  onPressed: () {
-                    setState(() {
-                      isHidden = !isHidden;
-                    });
-                  },
-                ),
+
+                  SizedBox(height: 20),
+                  TextFormField(
+                    controller: passwordController,
+                    obscureText: isHidden,
+                    cursorColor: Colors.blue,
+                    keyboardType: TextInputType.text,
+                    decoration: InputDecoration(
+                      hint: Text("Enter Your Password "),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(color: Colors.black),
+                      ),
+
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          isHidden ? Icons.visibility_off : Icons.visibility,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            isHidden = !isHidden;
+                          });
+                        },
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.trim().isEmpty) {
+                        return "* Required";
+                      }
+                      return null;
+                    },
+                  ),
+                ],
               ),
             ),
             SizedBox(height: 5),
@@ -109,9 +131,9 @@ class _VisitorloginscreenState extends State<Visitorloginscreen> {
               height: 50,
               child: OutlinedButton(
                 onPressed: () {
+                  if (_formKey.currentState?.validate() ?? false) {}
                   if (usernameController.text.isEmpty ||
                       passwordController.text.isEmpty) {
-                    Get.snackbar("Error", "Enter all fields");
                     return;
                   }
 

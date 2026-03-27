@@ -17,6 +17,8 @@ class _VisitorloginscreenState extends State<Dbsmloginscreen> {
 
   var green = const Color.fromARGB(255, 55, 157, 59);
 
+  final _formkey = GlobalKey<FormState>();
+
   AuthController controller = AuthController();
   TextEditingController username = TextEditingController();
   TextEditingController password = TextEditingController();
@@ -51,42 +53,62 @@ class _VisitorloginscreenState extends State<Dbsmloginscreen> {
               ),
             ),
             SizedBox(height: 20),
-            TextField(
-              controller: username,
-              cursorColor: Colors.blue,
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                hint: Text("Enter your Delegate Id "),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide(color: Colors.black),
-                ),
-              ),
-            ),
-            SizedBox(height: 20),
-            TextField(
-              controller: password,
-              obscureText: isHidden,
-              cursorColor: Colors.blue,
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                hint: Text("Enter Your Password "),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide(color: Colors.black),
-                ),
-                suffixIcon: IconButton(
-                  icon: Icon(
-                    isHidden ? Icons.visibility_off : Icons.visibility,
+            Form(
+              key: _formkey,
+              child: Column(
+                children: [
+                  TextFormField(
+                    controller: username,
+                    cursorColor: Colors.blue,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: InputDecoration(
+                      hint: Text("Enter your Delegate Id "),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(color: Colors.black),
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.trim().isEmpty) {
+                        return "* required";
+                      }
+                      return null;
+                    },
                   ),
-                  onPressed: () {
-                    setState(() {
-                      isHidden = !isHidden;
-                    });
-                  },
-                ),
+                  SizedBox(height: 20),
+                  TextFormField(
+                    controller: password,
+                    obscureText: isHidden,
+                    cursorColor: Colors.blue,
+                    keyboardType: TextInputType.text,
+                    decoration: InputDecoration(
+                      hint: Text("Enter Your Password "),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(color: Colors.black),
+                      ),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          isHidden ? Icons.visibility_off : Icons.visibility,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            isHidden = !isHidden;
+                          });
+                        },
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.trim().isEmpty) {
+                        return "* required";
+                      }
+                      return null;
+                    },
+                  ),
+                ],
               ),
             ),
+
             SizedBox(height: 5),
             TextButton(
               onPressed: () {},
@@ -101,11 +123,12 @@ class _VisitorloginscreenState extends State<Dbsmloginscreen> {
               height: 50,
               child: OutlinedButton(
                 onPressed: () {
+                  if (_formkey.currentState?.validate() ?? false) {}
+
                   String id = username.text.trim();
                   String pass = password.text.trim();
 
                   if (id.isEmpty || pass.isEmpty) {
-                    Get.snackbar("Error", "enter all fields");
                     return;
                   }
                   controller.dbsmLogin(id, pass);

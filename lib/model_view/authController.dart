@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../services/auth_service.dart';
 
@@ -18,7 +19,21 @@ class AuthController extends GetxController {
       if (data["Code"] == 1) {
         Get.snackbar("Success", "Login Successful");
       } else {
-        Get.snackbar("Error", data["Message"]);
+        Get.defaultDialog(
+          title: "Error",
+          middleText: data["Message"],
+          actions: [
+            ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: WidgetStatePropertyAll(Colors.red),
+              ),
+              onPressed: () {
+                Get.back();
+              },
+              child: Text("Retry", style: TextStyle(color: Colors.white)),
+            ),
+          ],
+        );
       }
     } catch (e) {
       Get.snackbar("Error", e.toString());
@@ -37,10 +52,27 @@ class AuthController extends GetxController {
       if (data["Code"] == 1) {
         Get.snackbar("Success", "Login Successful");
       } else {
-        Get.snackbar("Error", data["Message"] ?? "Login Failed");
+        Get.defaultDialog(
+          title: "Error",
+          titleStyle: TextStyle(color: Colors.red),
+
+          middleText: data["Message"] ?? "Login Failed",
+          middleTextStyle: TextStyle(fontSize: 17),
+          actions: [
+            ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: WidgetStatePropertyAll(Colors.red),
+              ),
+              onPressed: () {
+                Get.back();
+              },
+              child: Text("Retry", style: TextStyle(color: Colors.white)),
+            ),
+          ],
+        );
       }
     } catch (e) {
-      Get.snackbar("Error", e.toString());
+      Get.defaultDialog(title: "Error", middleText: e.toString());
     } finally {
       isLoading.value = false;
     }
@@ -72,16 +104,30 @@ class AuthController extends GetxController {
   Future<void> dbsmLogin(String user, String pass) async {
     try {
       isLoading.value = true;
-      final response = await _service.dbsmlogin(
-        userId: user,
-        password: pass,
-      );
+      final response = await _service.dbsmlogin(userId: user, password: pass);
       final data = response.data;
       print("API RESPONSE: $data");
       if (data["Code"] == 1) {
         Get.snackbar("Success", "Login Successful");
       } else {
-        Get.snackbar("Error", data["Message"]);
+        Get.defaultDialog(
+          title: "Error",
+          titleStyle: TextStyle(color: Colors.red),
+
+          middleText: data["Message"] ?? "Login Failed",
+          middleTextStyle: TextStyle(fontSize: 17),
+          actions: [
+            ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: WidgetStatePropertyAll(Colors.red),
+              ),
+              onPressed: () {
+                Get.back();
+              },
+              child: Text("Retry", style: TextStyle(color: Colors.white)),
+            ),
+          ],
+        );
       }
     } catch (e) {
       Get.snackbar("Error", e.toString());
@@ -91,19 +137,33 @@ class AuthController extends GetxController {
     }
   }
 
-   Future<void> rbsmLogin(String user, String pass) async {
+  Future<void> rbsmLogin(String user, String pass) async {
     try {
       isLoading.value = true;
-      final response = await _service.rbsmlogin(
-        userId: user,
-        password: pass,
-      );
+      final response = await _service.rbsmlogin(userId: user, password: pass);
       final data = response.data;
       print("API RESPONSE: $data");
       if (data["Code"] == 1) {
         Get.snackbar("Success", "Login Successful");
       } else {
-        Get.snackbar("Error", data["Message"]);
+        Get.defaultDialog(
+          title: "Error",
+          titleStyle: TextStyle(color: Colors.red),
+
+          middleText: data["Message"] ?? "Login Failed",
+          middleTextStyle: TextStyle(fontSize: 17),
+          actions: [
+            ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: WidgetStatePropertyAll(Colors.red),
+              ),
+              onPressed: () {
+                Get.back();
+              },
+              child: Text("Retry", style: TextStyle(color: Colors.white)),
+            ),
+          ],
+        );
       }
     } catch (e) {
       Get.snackbar("Error", e.toString());
@@ -113,19 +173,33 @@ class AuthController extends GetxController {
     }
   }
 
-   Future<void> iotLogin(String user, String pass) async {
+  Future<void> iotLogin(String user, String pass) async {
     try {
       isLoading.value = true;
-      final response = await _service.iotlogin(
-        userId: user,
-        password: pass,
-      );
+      final response = await _service.iotlogin(userId: user, password: pass);
       final data = response.data;
       print("API RESPONSE: $data");
       if (data["Code"] == 1) {
         Get.snackbar("Success", "Login Successful");
       } else {
-        Get.snackbar("Error", data["Message"]);
+        Get.defaultDialog(
+          title: "Error",
+          titleStyle: TextStyle(color: Colors.red),
+
+          middleText: data["Message"] ?? "Login Failed",
+          middleTextStyle: TextStyle(fontSize: 17),
+          actions: [
+            ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: WidgetStatePropertyAll(Colors.red),
+              ),
+              onPressed: () {
+                Get.back();
+              },
+              child: Text("Retry", style: TextStyle(color: Colors.white)),
+            ),
+          ],
+        );
       }
     } catch (e) {
       Get.snackbar("Error", e.toString());
