@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:n_gauge_apptask/model_view/filterController.dart';
-import 'package:n_gauge_apptask/views/exhibitorListScreen.dart';
+import 'package:n_gauge_apptask/Controller/filterController.dart';
+import 'package:n_gauge_apptask/views/Exhibitor/exhibitorListScreen.dart';
 
 class Filterscreenexibitorlist extends StatelessWidget {
   final FilterController controller = Get.put(FilterController());

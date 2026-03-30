@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
-import 'package:n_gauge_apptask/views/filterScreenExibitorList.dart';
+import 'package:n_gauge_apptask/views/Exhibitor/filterScreenExibitorList.dart';
 
 class Exhibitorlistscreen extends StatefulWidget {
   const Exhibitorlistscreen({super.key});

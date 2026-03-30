@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:n_gauge_apptask/views/b2bBuyerLoginScreen.dart';
-import 'package:n_gauge_apptask/views/exibitorLoginScreen.dart';
-import 'package:n_gauge_apptask/views/iotLoginScreen.dart';
-import 'package:n_gauge_apptask/views/visitorLoginScreen.dart';
+import 'package:n_gauge_apptask/views/B2bBuyer/b2bBuyerLoginScreen.dart';
+import 'package:n_gauge_apptask/views/Exhibitor/exibitorLoginScreen.dart';
+import 'package:n_gauge_apptask/views/IOT/iotLoginScreen.dart';
+import 'package:n_gauge_apptask/views/Visitor/visitorLoginScreen.dart';
 
 class Loginscreen extends StatelessWidget {
   Loginscreen({super.key});

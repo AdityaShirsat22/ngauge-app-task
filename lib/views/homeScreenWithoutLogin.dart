@@ -2,8 +2,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/utils.dart';
-import 'package:n_gauge_apptask/views/exhibitorListScreen.dart';
-import 'package:n_gauge_apptask/views/loginScreen.dart';
+import 'package:n_gauge_apptask/views/Exhibitor/exhibitorListScreen.dart';
+import 'package:n_gauge_apptask/views/all_loginScreen.dart';
 import 'package:n_gauge_apptask/views/qrScreen.dart';
 
 // ignore: must_be_immutable

@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:n_gauge_apptask/model_view/authController.dart';
-import 'package:n_gauge_apptask/views/homeScreen.dart';
+import 'package:n_gauge_apptask/Controller/authController.dart';
+import 'package:n_gauge_apptask/views/homeScreenWithoutLogin.dart';
 
-class Visitorloginscreen extends StatefulWidget {
-  const Visitorloginscreen({super.key});
+class Dbsmloginscreen extends StatefulWidget {
+  Dbsmloginscreen({super.key});
 
   @override
-  State<Visitorloginscreen> createState() => _VisitorloginscreenState();
+  State<Dbsmloginscreen> createState() => _VisitorloginscreenState();
 }
 
-class _VisitorloginscreenState extends State<Visitorloginscreen> {
-  final controller = Get.put(AuthController());
-
+class _VisitorloginscreenState extends State<Dbsmloginscreen> {
   var orange = Color.fromARGB(255, 255, 109, 24);
+
   var blue = const Color.fromARGB(255, 22, 41, 163);
+
   var green = const Color.fromARGB(255, 55, 157, 59);
 
-  TextEditingController usernameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
+  final _formkey = GlobalKey<FormState>();
+
+  final controller = Get.put(AuthController());
+  TextEditingController username = TextEditingController();
+  TextEditingController password = TextEditingController();
 
   bool isHidden = true;
 
@@ -32,7 +34,7 @@ class _VisitorloginscreenState extends State<Visitorloginscreen> {
         actions: [
           IconButton(
             onPressed: () {
-              Get.offAll(Homescreen());
+              Get.offAll(() => Homescreen());
             },
             icon: Icon(Icons.home),
           ),
@@ -46,21 +48,21 @@ class _VisitorloginscreenState extends State<Visitorloginscreen> {
             SizedBox(height: 30),
             Center(
               child: Text(
-                "Visitor Login",
+                "Enter your DBSM credentails",
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
             SizedBox(height: 20),
             Form(
-              key: _formKey,
+              key: _formkey,
               child: Column(
                 children: [
                   TextFormField(
-                    controller: usernameController,
+                    controller: username,
                     cursorColor: Colors.blue,
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
-                      hint: Text("Enter Visitor ID / Email "),
+                      hint: Text("Enter your Delegate Id "),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(color: Colors.black),
@@ -68,15 +70,14 @@ class _VisitorloginscreenState extends State<Visitorloginscreen> {
                     ),
                     validator: (value) {
                       if (value == null || value.trim().isEmpty) {
-                        return "* Required";
+                        return "* required";
                       }
                       return null;
                     },
                   ),
-
                   SizedBox(height: 20),
                   TextFormField(
-                    controller: passwordController,
+                    controller: password,
                     obscureText: isHidden,
                     cursorColor: Colors.blue,
                     keyboardType: TextInputType.text,
@@ -86,7 +87,6 @@ class _VisitorloginscreenState extends State<Visitorloginscreen> {
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(color: Colors.black),
                       ),
-
                       suffixIcon: IconButton(
                         icon: Icon(
                           isHidden ? Icons.visibility_off : Icons.visibility,
@@ -100,7 +100,7 @@ class _VisitorloginscreenState extends State<Visitorloginscreen> {
                     ),
                     validator: (value) {
                       if (value == null || value.trim().isEmpty) {
-                        return "* Required";
+                        return "* required";
                       }
                       return null;
                     },
@@ -108,18 +108,10 @@ class _VisitorloginscreenState extends State<Visitorloginscreen> {
                 ],
               ),
             ),
+
             SizedBox(height: 5),
             TextButton(
-              onPressed: () {
-                String id = usernameController.text.trim();
-                String pass = passwordController.text.trim();
-
-                if (id.isEmpty || pass.isEmpty) {
-                  Get.snackbar("error", "Enter all fields");
-                  return;
-                }
-                controller.visitorForgetPassword(id, pass);
-              },
+              onPressed: () {},
               child: Text(
                 "Forget password?",
                 style: TextStyle(color: Colors.lightBlue[600]),
@@ -131,16 +123,15 @@ class _VisitorloginscreenState extends State<Visitorloginscreen> {
               height: 50,
               child: OutlinedButton(
                 onPressed: () {
-                  if (_formKey.currentState?.validate() ?? false) {}
-                  if (usernameController.text.isEmpty ||
-                      passwordController.text.isEmpty) {
+                  if (_formkey.currentState?.validate() ?? false) {}
+
+                  String id = username.text.trim();
+                  String pass = password.text.trim();
+
+                  if (id.isEmpty || pass.isEmpty) {
                     return;
                   }
-
-                  controller.visitorlogin(
-                    usernameController.text,
-                    passwordController.text,
-                  );
+                  controller.dbsmLogin(id, pass);
                 },
                 style: OutlinedButton.styleFrom(
                   backgroundColor: blue,
@@ -150,20 +141,6 @@ class _VisitorloginscreenState extends State<Visitorloginscreen> {
                 ),
                 child: Text("Login", style: TextStyle(color: Colors.white)),
               ),
-            ),
-            SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text("Dont have an account?"),
-                TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    "Register",
-                    style: TextStyle(color: Colors.lightBlue[600]),
-                  ),
-                ),
-              ],
             ),
           ],
         ),

@@ -13,7 +13,7 @@ class AuthService {
     try {
       final response = await _dio.post(
         ApiConstants.visitorLogin,
-        queryParameters: {
+        data: {
           "UserID": userId,
           "password": password,
           "DeviceId": "123456",
@@ -43,7 +43,7 @@ class AuthService {
   }) async {
     final response = await _dio.post(
       ApiConstants.forgotPassword,
-      queryParameters: {"InId": inId, "Password": password},
+      data: {"InId": inId, "Password": password},
     );
     return response;
   }
@@ -55,8 +55,8 @@ class AuthService {
   }) async {
     try {
       final response = await _dio.post(
-        ApiConstants.visitorLogin,
-        queryParameters: {
+        ApiConstants.dbsmLogin,
+        data: {
           "UserID": userId,
           "password": password,
           "DeviceId": "123456",
@@ -76,8 +76,8 @@ class AuthService {
   }) async {
     try {
       final response = await _dio.post(
-        ApiConstants.visitorLogin,
-        queryParameters: {
+        ApiConstants.rbsmLogin,
+        data: {
           "UserID": userId,
           "password": password,
           "DeviceId": "123456",
@@ -97,8 +97,8 @@ class AuthService {
   }) async {
     try {
       final response = await _dio.post(
-        ApiConstants.visitorLogin,
-        queryParameters: {
+        ApiConstants.iotLogin,
+        data: {
           "UserID": userId,
           "password": password,
           "DeviceId": "123456",

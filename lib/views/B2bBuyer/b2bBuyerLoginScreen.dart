@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:n_gauge_apptask/views/dbsmLoginScreen.dart';
-import 'package:n_gauge_apptask/views/homeScreen.dart';
-import 'package:n_gauge_apptask/views/rbsmLoginScreen.dart';
+import 'package:n_gauge_apptask/views/Dbms/dbsmLoginScreen.dart';
+import 'package:n_gauge_apptask/views/homeScreenWithoutLogin.dart';
+import 'package:n_gauge_apptask/views/Rbms/rbsmLoginScreen.dart';
 
 class B2BBuyerLoginScreen extends StatelessWidget {
   const B2BBuyerLoginScreen({super.key});
@@ -16,7 +16,7 @@ class B2BBuyerLoginScreen extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              Get.offAll(Homescreen());
+              Get.offAll(() => Homescreen());
             },
             icon: Icon(Icons.home),
           ),
@@ -58,7 +58,7 @@ class B2BBuyerLoginScreen extends StatelessWidget {
                 height: 50,
                 child: OutlinedButton(
                   onPressed: () {
-                    Get.to(Dbsmloginscreen());
+                    Get.to(() => Dbsmloginscreen());
                   },
                   style: OutlinedButton.styleFrom(
                     backgroundColor: const Color.fromARGB(255, 22, 41, 163),

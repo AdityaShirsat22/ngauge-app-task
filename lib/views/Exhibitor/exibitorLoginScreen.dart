@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:n_gauge_apptask/model_view/authController.dart';
-import 'package:n_gauge_apptask/views/homeScreen.dart';
+import 'package:n_gauge_apptask/Controller/authController.dart';
+import 'package:n_gauge_apptask/views/homeScreenWithoutLogin.dart';
 
 // ignore: must_be_immutable
 class Exibitorloginscreen extends StatelessWidget {
   Exibitorloginscreen({super.key});
 
-  AuthController controller = Get.put(AuthController());
+  final controller = Get.put(AuthController());
 
   final _formkey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
@@ -24,7 +24,7 @@ class Exibitorloginscreen extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              Get.offAll(Homescreen());
+              Get.offAll(() => Homescreen());
             },
             icon: Icon(Icons.home),
           ),

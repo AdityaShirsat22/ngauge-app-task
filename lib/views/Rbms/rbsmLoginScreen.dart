@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:n_gauge_apptask/model_view/authController.dart';
-import 'package:n_gauge_apptask/views/homeScreen.dart';
+import 'package:n_gauge_apptask/Controller/authController.dart';
+import 'package:n_gauge_apptask/views/homeScreenWithoutLogin.dart';
 
 class Rbsmloginscreen extends StatefulWidget {
   Rbsmloginscreen({super.key});
@@ -18,7 +18,7 @@ class _VisitorloginscreenState extends State<Rbsmloginscreen> {
   var green = const Color.fromARGB(255, 55, 157, 59);
 
   final _formkey = GlobalKey<FormState>();
-  AuthController controller = AuthController();
+  final controller = Get.put(AuthController());
   TextEditingController username = TextEditingController();
   TextEditingController password = TextEditingController();
 
@@ -33,7 +33,7 @@ class _VisitorloginscreenState extends State<Rbsmloginscreen> {
         actions: [
           IconButton(
             onPressed: () {
-              Get.offAll(Homescreen());
+              Get.offAll(() => Homescreen());
             },
             icon: Icon(Icons.home),
           ),

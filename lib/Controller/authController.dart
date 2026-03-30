@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import '../services/auth_service.dart';
 
 class AuthController extends GetxController {
-  final AuthService _service = AuthService();
+  final AuthService _service = Get.find<AuthService>();
 
   var isLoading = false.obs;
 
