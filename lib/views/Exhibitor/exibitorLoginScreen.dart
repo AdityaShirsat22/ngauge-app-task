@@ -7,7 +7,7 @@ import 'package:n_gauge_apptask/views/homeScreenWithoutLogin.dart';
 class Exibitorloginscreen extends StatelessWidget {
   Exibitorloginscreen({super.key});
 
-  final controller = Get.put(AuthController());
+  final controller = Get.find<AuthController>();
 
   final _formkey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
@@ -69,14 +69,15 @@ class Exibitorloginscreen extends StatelessWidget {
               width: double.infinity,
               height: 50,
               child: OutlinedButton(
-                onPressed: () {
+                onPressed: () async {
                   if (_formkey.currentState?.validate() ?? false) {}
                   String email = emailController.text.trim();
 
                   if (email.isEmpty) {
                     return;
                   }
-                  controller.exhibitorLogin(email);
+                  await controller.exhibitorLogin(emailController.text);
+                  Get.offAllNamed('/exhibitorHome');
                 },
                 style: OutlinedButton.styleFrom(
                   backgroundColor: blue,

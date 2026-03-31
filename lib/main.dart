@@ -1,12 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:n_gauge_apptask/Controller/authController.dart';
+import 'package:n_gauge_apptask/services/hiveservice.dart';
 import 'package:n_gauge_apptask/services/auth_service.dart';
+import 'package:n_gauge_apptask/views/Exhibitor/exhibitorHomeScreen.dart';
+import 'package:n_gauge_apptask/views/Visitor/visitorHomeScreen.dart';
 import 'package:n_gauge_apptask/views/homeScreenWithoutLogin.dart';
 import 'package:n_gauge_apptask/views/all_loginScreen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  await Hive.openBox('authBox');
+  Get.put(Hiveservice(), permanent: true);
+
+  Get.put(AuthService(), permanent: true);
+  Get.put(AuthController(), permanent: true);
+
   runApp(const MyApp());
-  Get.put(AuthService());
 }
 
 class MyApp extends StatelessWidget {
@@ -23,6 +35,8 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(name: '/home', page: () => Homescreen()),
         GetPage(name: '/login', page: () => Loginscreen()),
+        GetPage(name: '/exhibitorHome', page: () => Exhibitorhomescreen()),
+        GetPage(name: '/visitorHome', page: () => Visitorhomescreen()),
       ],
     );
   }

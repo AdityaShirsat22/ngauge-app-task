@@ -27,10 +27,10 @@ class AuthService {
   }
 
   //exhibitor login
-  Future<Response> exhibitorLogin({required String email}) async {
+  Future<Response> exhibitorLogin({required String userId}) async {
     final response = await _dio.get(
       ApiConstants.exhibitorLogin,
-      queryParameters: {"EmailId": email},
+      queryParameters: {"EmailId": userId},
     );
 
     return response;

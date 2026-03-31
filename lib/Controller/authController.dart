@@ -1,11 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:n_gauge_apptask/services/hiveservice.dart';
 import '../services/auth_service.dart';
 
 class AuthController extends GetxController {
   final AuthService _service = Get.find<AuthService>();
+  final Hiveservice _hive = Get.find<Hiveservice>();
 
   var isLoading = false.obs;
+
+  Future<bool> login(String user, String pass, String role) async {
+    try {
+      isLoading.value = true;
+
+      final response = role == "visitor"
+          ? await _service.visitorLogin(userId: user, password: pass)
+          : await _service.exhibitorLogin(userId: user);
+
+      if (response.data["Code"] == 1) {
+        _hive.saveRole(role);
+        _hive.setLoggedIn(true);
+        return true;
+      }
+
+      return false;
+    } catch (e) {
+      return false;
+    } finally {
+      isLoading.value = false;
+    }
+  }
 
   Future<void> visitorlogin(String user, String pass) async {
     try {
@@ -46,7 +70,7 @@ class AuthController extends GetxController {
   Future<void> exhibitorLogin(String email) async {
     try {
       isLoading.value = true;
-      final response = await _service.exhibitorLogin(email: email);
+      final response = await _service.exhibitorLogin(userId: email);
       final data = response.data;
       print("EXHIBITOR RESPONSE: $data");
       if (data["Code"] == 1) {

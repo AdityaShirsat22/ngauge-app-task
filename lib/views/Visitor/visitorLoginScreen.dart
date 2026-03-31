@@ -130,17 +130,19 @@ class _VisitorloginscreenState extends State<Visitorloginscreen> {
               width: double.infinity,
               height: 50,
               child: OutlinedButton(
-                onPressed: () {
+                onPressed: () async {
                   if (_formKey.currentState?.validate() ?? false) {}
                   if (usernameController.text.isEmpty ||
                       passwordController.text.isEmpty) {
                     return;
                   }
 
-                  controller.visitorlogin(
+                  await controller.login(
                     usernameController.text,
                     passwordController.text,
+                    'visitor',
                   );
+                  Get.offAllNamed('/visitorHome');
                 },
                 style: OutlinedButton.styleFrom(
                   backgroundColor: blue,

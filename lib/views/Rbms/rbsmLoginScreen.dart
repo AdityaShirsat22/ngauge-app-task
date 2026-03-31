@@ -4,7 +4,7 @@ import 'package:n_gauge_apptask/Controller/authController.dart';
 import 'package:n_gauge_apptask/views/homeScreenWithoutLogin.dart';
 
 class Rbsmloginscreen extends StatefulWidget {
-  Rbsmloginscreen({super.key});
+  const Rbsmloginscreen({super.key});
 
   @override
   State<Rbsmloginscreen> createState() => _VisitorloginscreenState();
