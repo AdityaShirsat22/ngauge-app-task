@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:n_gauge_apptask/views/Dbms/dbsmLoginScreen.dart';
-import 'package:n_gauge_apptask/views/homeScreenWithoutLogin.dart';
+import 'package:n_gauge_apptask/views/homeScreen.dart';
 import 'package:n_gauge_apptask/views/Rbms/rbsmLoginScreen.dart';
 
 class B2BBuyerLoginScreen extends StatelessWidget {

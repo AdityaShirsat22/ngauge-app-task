@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:n_gauge_apptask/models/exhibitorModel.dart';
 import '../api/dio_client.dart';
 import '../api/api_constants.dart';
 
@@ -108,6 +109,29 @@ class AuthService {
       return response;
     } catch (e) {
       rethrow;
+    }
+  }
+
+  Future<Record?> fetchExhibitorDetails(String email) async {
+    try {
+      final response = await _dio.get(
+        ApiConstants.exhibitorLogin,
+        queryParameters: {"EmailId": email.trim()},
+      );
+
+      print("API RESPONSE: ${response.data}");
+
+      final model = Exhibitormodel.fromJson(response.data);
+
+      
+      if (model.records != null && model.records!.isNotEmpty) {
+        return model.records!.first;
+      }
+
+      return null;
+    } catch (e) {
+      print("ERROR: $e");
+      return null;
     }
   }
 }

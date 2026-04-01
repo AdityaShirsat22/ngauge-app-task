@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:n_gauge_apptask/Controller/authController.dart';
-import 'package:n_gauge_apptask/views/homeScreenWithoutLogin.dart';
+import 'package:n_gauge_apptask/views/homeScreen.dart';
 
 class Visitorloginscreen extends StatefulWidget {
   const Visitorloginscreen({super.key});

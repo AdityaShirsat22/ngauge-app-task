@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:n_gauge_apptask/models/exhibitorModel.dart';
 import 'package:n_gauge_apptask/services/hiveservice.dart';
 import '../services/auth_service.dart';
 
 class AuthController extends GetxController {
   final AuthService _service = Get.find<AuthService>();
   final Hiveservice _hive = Get.find<Hiveservice>();
+  var exhibitor = Rxn<Record>();
 
   var isLoading = false.obs;
 
@@ -228,6 +230,24 @@ class AuthController extends GetxController {
     } catch (e) {
       Get.snackbar("Error", e.toString());
       print(e.toString());
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  //exhibitor details
+  Future<bool> getExhibitorDetails(String email) async {
+    try {
+      isLoading.value = true;
+
+      final data = await _service.fetchExhibitorDetails(email);
+
+      if (data != null) {
+        exhibitor.value = data;
+        return true;
+      }
+
+      return false;
     } finally {
       isLoading.value = false;
     }

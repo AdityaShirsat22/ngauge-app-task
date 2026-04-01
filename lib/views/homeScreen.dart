@@ -97,9 +97,7 @@ class _HomescreenState extends State<Homescreen> {
                         ),
                         title: Text("My Dashboard"),
                         trailing: Icon(Icons.arrow_forward_ios, size: 20),
-                        onTap: () {
-                          Get.to(() => Loginscreen());
-                        },
+                        onTap: () {},
                       ),
                       Divider(color: orange, thickness: 0.1),
                       ListTile(

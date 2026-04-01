@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:n_gauge_apptask/Controller/authController.dart';
-import 'package:n_gauge_apptask/views/homeScreenWithoutLogin.dart';
+import 'package:n_gauge_apptask/views/homeScreen.dart';
 
 // ignore: must_be_immutable
 class Exibitorloginscreen extends StatelessWidget {
@@ -70,14 +70,19 @@ class Exibitorloginscreen extends StatelessWidget {
               height: 50,
               child: OutlinedButton(
                 onPressed: () async {
-                  if (_formkey.currentState?.validate() ?? false) {}
-                  String email = emailController.text.trim();
+                  if (_formkey.currentState?.validate() ?? false) {
+                    String email = emailController.text.trim();
 
-                  if (email.isEmpty) {
-                    return;
+                    if (email.isEmpty) return;
+
+                    bool success = await controller.getExhibitorDetails(email);
+
+                    if (success) {
+                      Get.toNamed('/exhibitorDetails');
+                    } else {
+                      Get.snackbar("Error", "Email not found");
+                    }
                   }
-                  await controller.exhibitorLogin(emailController.text);
-                  Get.offAllNamed('/exhibitorHome');
                 },
                 style: OutlinedButton.styleFrom(
                   backgroundColor: blue,
