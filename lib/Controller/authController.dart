@@ -11,98 +11,132 @@ class AuthController extends GetxController {
 
   var isLoading = false.obs;
 
-  Future<bool> login(String user, String pass, String role) async {
-    try {
-      isLoading.value = true;
+  // Future<bool> login(String user, String pass, String role) async {
+  //   try {
+  //     isLoading.value = true;
 
-      final response = role == "visitor"
-          ? await _service.visitorLogin(userId: user, password: pass)
-          : await _service.exhibitorLogin(userId: user);
+  //     final response = role == "visitor"
+  //         ? await _service.visitorLogin(
+  //             userId: user.trim(),
+  //             password: pass.trim(),
+  //             deviceId: '123456',
+  //           )
+  //         : await _service.exhibitorLogin(userId: user.trim());
 
-      if (response.data["Code"] == 1) {
-        _hive.saveRole(role);
-        _hive.setLoggedIn(true);
-        return true;
-      }
+  //     final code = response.data["Code"];
+  //     final message =
+  //         response.data["Message"] ??
+  //         response.data["message"] ??
+  //         "Login failed";
+  //     final isSuccess = code == 1 || code == "1" || code == true;
 
-      return false;
-    } catch (e) {
-      return false;
-    } finally {
-      isLoading.value = false;
-    }
-  }
+  //     if (isSuccess) {
+  //       _hive.saveRole(role);
+  //       _hive.setLoggedIn(true);
+  //       return true;
+  //     }
 
-  Future<void> visitorlogin(String user, String pass) async {
+  //     Get.snackbar(
+  //       'Error',
+  //       message.toString(),
+  //       snackPosition: SnackPosition.BOTTOM,
+  //       backgroundColor: Colors.redAccent,
+  //       colorText: Colors.white,
+  //     );
+
+  //     return false;
+  //   } catch (e) {
+  //     Get.snackbar(
+  //       'Error',
+  //       'Network or server error',
+  //       snackPosition: SnackPosition.BOTTOM,
+  //       backgroundColor: Colors.redAccent,
+  //       colorText: Colors.white,
+  //     );
+  //     return false;
+  //   } finally {
+  //     isLoading.value = false;
+  //   }
+  // }
+
+  Future<bool> visitorlogin(String user, String pass) async {
     try {
       isLoading.value = true;
       final response = await _service.visitorLogin(
-        userId: user,
-        password: pass,
+        userId: user.trim(),
+        password: pass.trim(),
       );
       final data = response.data;
       print("API RESPONSE: $data");
-      if (data["Code"] == 1) {
+      final code = data["Code"];
+      final isSuccess = code == 1 || code == "1" || code == true;
+
+      if (isSuccess) {
+        _hive.saveRole('visitor');
+        _hive.setLoggedIn(true);
         Get.snackbar("Success", "Login Successful");
+        return true;
       } else {
-        Get.defaultDialog(
-          title: "Error",
-          middleText: data["Message"],
-          actions: [
-            ElevatedButton(
-              style: ButtonStyle(
-                backgroundColor: WidgetStatePropertyAll(Colors.red),
-              ),
-              onPressed: () {
-                Get.back();
-              },
-              child: Text("Retry", style: TextStyle(color: Colors.white)),
-            ),
-          ],
+        final message =
+            data["Message"] ?? data["message"] ?? "Enter valid id and password";
+        Get.snackbar(
+          "Error",
+          message.toString(),
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.redAccent,
+          colorText: Colors.white,
         );
+        return false;
       }
     } catch (e) {
-      Get.snackbar("Error", e.toString());
+      Get.snackbar(
+        "Error",
+        "Network or server error",
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.redAccent,
+        colorText: Colors.white,
+      );
       print(e.toString());
+      return false;
     } finally {
       isLoading.value = false;
     }
   }
 
-  Future<void> exhibitorLogin(String email) async {
-    try {
-      isLoading.value = true;
-      final response = await _service.exhibitorLogin(userId: email);
-      final data = response.data;
-      print("EXHIBITOR RESPONSE: $data");
-      if (data["Code"] == 1) {
-        Get.snackbar("Success", "Login Successful");
-      } else {
-        Get.defaultDialog(
-          title: "Error",
-          titleStyle: TextStyle(color: Colors.red),
+  // Future<void> exhibitorLogin(String email) async {
+  //   try {
+  //     isLoading.value = true;
+  //     final response = await _service.exhibitorLogin(userId: email);
+  //     final data = response.data;
+  //     print("EXHIBITOR RESPONSE: $data");
+  //     if (data["Code"] == 1) {
+  //       Get.snackbar("Success", "Login Successful");
+  //     } else {
+  //       Get.defaultDialog(
+  //         title: "Error",
+  //         titleStyle: TextStyle(color: Colors.red),
 
-          middleText: data["Message"] ?? "Login Failed",
-          middleTextStyle: TextStyle(fontSize: 17),
-          actions: [
-            ElevatedButton(
-              style: ButtonStyle(
-                backgroundColor: WidgetStatePropertyAll(Colors.red),
-              ),
-              onPressed: () {
-                Get.back();
-              },
-              child: Text("Retry", style: TextStyle(color: Colors.white)),
-            ),
-          ],
-        );
-      }
-    } catch (e) {
-      Get.defaultDialog(title: "Error", middleText: e.toString());
-    } finally {
-      isLoading.value = false;
-    }
-  }
+  //         middleText: data["Message"] ?? "Login Failed",
+  //         middleTextStyle: TextStyle(fontSize: 17),
+  //         actions: [
+  //           ElevatedButton(
+  //             style: ButtonStyle(
+  //               backgroundColor: WidgetStatePropertyAll(Colors.red),
+  //             ),
+  //             onPressed: () {
+  //               Get.back();
+  //             },
+  //             child: Text("Retry", style: TextStyle(color: Colors.white)),
+  //           ),
+  //         ],
+  //       );
+  //     }
+  //   } catch (e) {
+  //     Get.defaultDialog(title: "Error", middleText: e.toString());
+  //   } finally {
+  //     isLoading.value = false;
+  //   }
+  // }
 
   Future<void> visitorForgetPassword(String inId, String password) async {
     try {

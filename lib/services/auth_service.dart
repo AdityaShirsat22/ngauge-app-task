@@ -14,7 +14,7 @@ class AuthService {
     try {
       final response = await _dio.post(
         ApiConstants.visitorLogin,
-        data: {
+        queryParameters: {
           "UserID": userId,
           "password": password,
           "DeviceId": "123456",
@@ -123,7 +123,6 @@ class AuthService {
 
       final model = Exhibitormodel.fromJson(response.data);
 
-      
       if (model.records != null && model.records!.isNotEmpty) {
         return model.records!.first;
       }

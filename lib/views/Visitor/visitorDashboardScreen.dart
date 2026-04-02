@@ -3,20 +3,20 @@ import 'package:get/get.dart';
 import 'package:n_gauge_apptask/views/Exhibitor/exhibitorListScreen.dart';
 import 'package:n_gauge_apptask/views/all_loginScreen.dart';
 
-class Exhibitordashboardscreen extends StatefulWidget {
-  const Exhibitordashboardscreen({super.key});
+class Visitordashboardscreen extends StatefulWidget {
+  const Visitordashboardscreen({super.key});
 
   @override
-  State<Exhibitordashboardscreen> createState() =>
+  State<Visitordashboardscreen> createState() =>
       _ExhibitordashboardscreenState();
 }
 
-class _ExhibitordashboardscreenState extends State<Exhibitordashboardscreen> {
+class _ExhibitordashboardscreenState extends State<Visitordashboardscreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Back", style: TextStyle(color: Colors.white)),
+        title: Text("Visitor", style: TextStyle(color: Colors.white)),
         backgroundColor: orange,
       ),
       body: Padding(
@@ -26,7 +26,7 @@ class _ExhibitordashboardscreenState extends State<Exhibitordashboardscreen> {
           children: [
             SizedBox(height: 20),
             Text(
-              "Exhibitor Dashboard",
+              "Visitor Dashboard",
               style: TextStyle(fontSize: 23, fontWeight: FontWeight.w500),
             ),
             SizedBox(height: 20),
@@ -77,30 +77,7 @@ class _ExhibitordashboardscreenState extends State<Exhibitordashboardscreen> {
                       },
                     ),
                   ),
-                  SizedBox(height: 10),
-                  Card(
-                    child: ListTile(
-                      leading: Icon(
-                        Icons.meeting_room,
-                        color: Colors.blue[800],
-                      ),
-                      title: Text(
-                        'My B2B Meetings',
-                        style: TextStyle(
-                          fontSize: 18,
-                          //fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      trailing: Icon(Icons.arrow_forward_ios, size: 18),
-                      onTap: () {
-                        Get.snackbar(
-                          'Tap',
-                          'My B2B Meetings clicked',
-                          snackPosition: SnackPosition.BOTTOM,
-                        );
-                      },
-                    ),
-                  ),
+
                   SizedBox(height: 10),
                   Card(
                     child: ListTile(

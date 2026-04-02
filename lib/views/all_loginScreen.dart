@@ -4,6 +4,7 @@ import 'package:n_gauge_apptask/views/B2bBuyer/b2bBuyerLoginScreen.dart';
 import 'package:n_gauge_apptask/views/Exhibitor/exibitorLoginScreen.dart';
 import 'package:n_gauge_apptask/views/IOT/iotLoginScreen.dart';
 import 'package:n_gauge_apptask/views/Visitor/visitorLoginScreen.dart';
+import 'package:n_gauge_apptask/views/homeScreen.dart';
 
 class Loginscreen extends StatelessWidget {
   Loginscreen({super.key});
@@ -12,6 +13,12 @@ class Loginscreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Get.offAll(() => Homescreen());
+          },
+        ),
         title: Text("Back", style: TextStyle(color: Colors.white)),
         backgroundColor: const Color.fromARGB(255, 255, 109, 24),
       ),

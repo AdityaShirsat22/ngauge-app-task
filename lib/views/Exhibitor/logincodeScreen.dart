@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:n_gauge_apptask/views/Exhibitor/exhibitorDashboardScreen.dart';
+import 'package:n_gauge_apptask/views/Exhibitor/exhibitorListScreen.dart';
 import 'package:pinput/pinput.dart';
 
 class LoginCodeScreen extends StatefulWidget {
@@ -60,8 +61,8 @@ class _LoginCodeScreenState extends State<LoginCodeScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Enter Login Code'),
-        backgroundColor: Colors.orange,
+        //title: const Text('Enter Login Code'),
+        backgroundColor: orange,
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: Padding(

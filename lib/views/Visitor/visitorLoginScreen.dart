@@ -137,12 +137,22 @@ class _VisitorloginscreenState extends State<Visitorloginscreen> {
                     return;
                   }
 
-                  await controller.login(
+                  final success = await controller.visitorlogin(
                     usernameController.text,
                     passwordController.text,
-                    'visitor',
                   );
-                  Get.offAllNamed('/visitorHome');
+
+                  if (success) {
+                    Get.offAllNamed('/visitorHome');
+                  } else {
+                    Get.snackbar(
+                      'Error',
+                      'Enter valid id and password',
+                      snackPosition: SnackPosition.BOTTOM,
+                      backgroundColor: Colors.redAccent,
+                      colorText: Colors.white,
+                    );
+                  }
                 },
                 style: OutlinedButton.styleFrom(
                   backgroundColor: blue,
