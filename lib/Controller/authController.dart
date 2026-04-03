@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:n_gauge_apptask/models/exhibitorModel.dart';
@@ -11,53 +12,22 @@ class AuthController extends GetxController {
 
   var isLoading = false.obs;
 
-  // Future<bool> login(String user, String pass, String role) async {
-  //   try {
-  //     isLoading.value = true;
+  bool isLoggedIn() {
+    return _hive.isloggedIn();
+  }
 
-  //     final response = role == "visitor"
-  //         ? await _service.visitorLogin(
-  //             userId: user.trim(),
-  //             password: pass.trim(),
-  //             deviceId: '123456',
-  //           )
-  //         : await _service.exhibitorLogin(userId: user.trim());
+  String getRole() {
+    return _hive.getRole() ?? '';
+  }
 
-  //     final code = response.data["Code"];
-  //     final message =
-  //         response.data["Message"] ??
-  //         response.data["message"] ??
-  //         "Login failed";
-  //     final isSuccess = code == 1 || code == "1" || code == true;
+  void setLoggedInUser(String role) {
+    _hive.saveRole(role);
+    _hive.setLoggedIn(true);
+  }
 
-  //     if (isSuccess) {
-  //       _hive.saveRole(role);
-  //       _hive.setLoggedIn(true);
-  //       return true;
-  //     }
-
-  //     Get.snackbar(
-  //       'Error',
-  //       message.toString(),
-  //       snackPosition: SnackPosition.BOTTOM,
-  //       backgroundColor: Colors.redAccent,
-  //       colorText: Colors.white,
-  //     );
-
-  //     return false;
-  //   } catch (e) {
-  //     Get.snackbar(
-  //       'Error',
-  //       'Network or server error',
-  //       snackPosition: SnackPosition.BOTTOM,
-  //       backgroundColor: Colors.redAccent,
-  //       colorText: Colors.white,
-  //     );
-  //     return false;
-  //   } finally {
-  //     isLoading.value = false;
-  //   }
-  // }
+  void logout() {
+    _hive.loggout();
+  }
 
   Future<bool> visitorlogin(String user, String pass) async {
     try {
@@ -67,13 +37,11 @@ class AuthController extends GetxController {
         password: pass.trim(),
       );
       final data = response.data;
-      print("API RESPONSE: $data");
       final code = data["Code"];
       final isSuccess = code == 1 || code == "1" || code == true;
 
       if (isSuccess) {
-        _hive.saveRole('visitor');
-        _hive.setLoggedIn(true);
+        setLoggedInUser('visitor');
         Get.snackbar("Success", "Login Successful");
         return true;
       } else {
@@ -96,47 +64,11 @@ class AuthController extends GetxController {
         backgroundColor: Colors.redAccent,
         colorText: Colors.white,
       );
-      print(e.toString());
       return false;
     } finally {
       isLoading.value = false;
     }
   }
-
-  // Future<void> exhibitorLogin(String email) async {
-  //   try {
-  //     isLoading.value = true;
-  //     final response = await _service.exhibitorLogin(userId: email);
-  //     final data = response.data;
-  //     print("EXHIBITOR RESPONSE: $data");
-  //     if (data["Code"] == 1) {
-  //       Get.snackbar("Success", "Login Successful");
-  //     } else {
-  //       Get.defaultDialog(
-  //         title: "Error",
-  //         titleStyle: TextStyle(color: Colors.red),
-
-  //         middleText: data["Message"] ?? "Login Failed",
-  //         middleTextStyle: TextStyle(fontSize: 17),
-  //         actions: [
-  //           ElevatedButton(
-  //             style: ButtonStyle(
-  //               backgroundColor: WidgetStatePropertyAll(Colors.red),
-  //             ),
-  //             onPressed: () {
-  //               Get.back();
-  //             },
-  //             child: Text("Retry", style: TextStyle(color: Colors.white)),
-  //           ),
-  //         ],
-  //       );
-  //     }
-  //   } catch (e) {
-  //     Get.defaultDialog(title: "Error", middleText: e.toString());
-  //   } finally {
-  //     isLoading.value = false;
-  //   }
-  // }
 
   Future<void> visitorForgetPassword(String inId, String password) async {
     try {
@@ -147,7 +79,6 @@ class AuthController extends GetxController {
       );
 
       final data = response.data;
-      print("FORGOT PASSWORD RESPONSE: $data");
 
       if (data["Code"] == 1) {
         Get.snackbar("Success", data["Message"] ?? "Password Updated");
@@ -166,7 +97,6 @@ class AuthController extends GetxController {
       isLoading.value = true;
       final response = await _service.dbsmlogin(userId: user, password: pass);
       final data = response.data;
-      print("API RESPONSE: $data");
       if (data["Code"] == 1) {
         Get.snackbar("Success", "Login Successful");
       } else {
@@ -191,7 +121,6 @@ class AuthController extends GetxController {
       }
     } catch (e) {
       Get.snackbar("Error", e.toString());
-      print(e.toString());
     } finally {
       isLoading.value = false;
     }
@@ -202,7 +131,6 @@ class AuthController extends GetxController {
       isLoading.value = true;
       final response = await _service.rbsmlogin(userId: user, password: pass);
       final data = response.data;
-      print("API RESPONSE: $data");
       if (data["Code"] == 1) {
         Get.snackbar("Success", "Login Successful");
       } else {
@@ -227,7 +155,6 @@ class AuthController extends GetxController {
       }
     } catch (e) {
       Get.snackbar("Error", e.toString());
-      print(e.toString());
     } finally {
       isLoading.value = false;
     }
@@ -238,7 +165,6 @@ class AuthController extends GetxController {
       isLoading.value = true;
       final response = await _service.iotlogin(userId: user, password: pass);
       final data = response.data;
-      print("API RESPONSE: $data");
       if (data["Code"] == 1) {
         Get.snackbar("Success", "Login Successful");
       } else {
@@ -263,7 +189,6 @@ class AuthController extends GetxController {
       }
     } catch (e) {
       Get.snackbar("Error", e.toString());
-      print(e.toString());
     } finally {
       isLoading.value = false;
     }

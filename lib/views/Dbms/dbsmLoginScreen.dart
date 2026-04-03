@@ -4,7 +4,7 @@ import 'package:n_gauge_apptask/Controller/authController.dart';
 import 'package:n_gauge_apptask/views/homeScreen.dart';
 
 class Dbsmloginscreen extends StatefulWidget {
-  Dbsmloginscreen({super.key});
+  const Dbsmloginscreen({super.key});
 
   @override
   State<Dbsmloginscreen> createState() => _VisitorloginscreenState();

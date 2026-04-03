@@ -1,8 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
-import 'package:get/utils.dart';
-import 'package:n_gauge_apptask/views/Exhibitor/exhibitorDashboardScreen.dart';
+import 'package:get/get.dart';
+import 'package:n_gauge_apptask/Controller/authController.dart';
 import 'package:n_gauge_apptask/views/Exhibitor/exhibitorListScreen.dart';
 import 'package:n_gauge_apptask/views/all_loginScreen.dart';
 import 'package:n_gauge_apptask/views/qrScreen.dart';
@@ -36,6 +35,18 @@ class _HomescreenState extends State<Homescreen> {
           ),
           IconButton(
             onPressed: () {
+              final authController = Get.find<AuthController>();
+              if (authController.isLoggedIn()) {
+                final role = authController.getRole();
+                if (role == 'exhibitor') {
+                  Get.toNamed('/exhibitorHome');
+                  return;
+                }
+                if (role == 'visitor') {
+                  Get.toNamed('/visitorHome');
+                  return;
+                }
+              }
               Get.to(() => Loginscreen());
             },
             icon: Icon(Icons.person, color: Colors.white, size: 28),
@@ -48,6 +59,18 @@ class _HomescreenState extends State<Homescreen> {
           ),
           IconButton(
             onPressed: () {
+              final authController = Get.find<AuthController>();
+              if (authController.isLoggedIn()) {
+                final role = authController.getRole();
+                if (role == 'exhibitor') {
+                  Get.toNamed('/exhibitorsetting');
+                  return;
+                }
+                if (role == 'visitor') {
+                  Get.toNamed('/visitorsetting');
+                  return;
+                }
+              }
               Get.to(() => Loginscreen());
             },
             icon: Icon(Icons.settings, color: Colors.white, size: 28),
@@ -99,7 +122,19 @@ class _HomescreenState extends State<Homescreen> {
                         title: Text("My Dashboard"),
                         trailing: Icon(Icons.arrow_forward_ios, size: 20),
                         onTap: () {
-                          Get.to(() => Exhibitordashboardscreen());
+                          final authController = Get.find<AuthController>();
+                          if (authController.isLoggedIn()) {
+                            final role = authController.getRole();
+                            if (role == 'exhibitor') {
+                              Get.toNamed('/exhibitorHome');
+                              return;
+                            }
+                            if (role == 'visitor') {
+                              Get.toNamed('/visitorHome');
+                              return;
+                            }
+                          }
+                          Get.to(() => Loginscreen());
                         },
                       ),
                       Divider(color: orange, thickness: 0.1),

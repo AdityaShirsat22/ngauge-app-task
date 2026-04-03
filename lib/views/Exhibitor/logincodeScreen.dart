@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:n_gauge_apptask/views/Exhibitor/exhibitorDashboardScreen.dart';
-import 'package:n_gauge_apptask/views/Exhibitor/exhibitorListScreen.dart';
+import 'package:n_gauge_apptask/Controller/authController.dart';
 import 'package:pinput/pinput.dart';
 
 class LoginCodeScreen extends StatefulWidget {
@@ -15,6 +14,7 @@ class LoginCodeScreen extends StatefulWidget {
 }
 
 class _LoginCodeScreenState extends State<LoginCodeScreen> {
+  var orange = Color.fromARGB(255, 255, 109, 24);
   final TextEditingController _controller = TextEditingController();
 
   void _verifyCode() {
@@ -37,14 +37,17 @@ class _LoginCodeScreenState extends State<LoginCodeScreen> {
         'Error',
         'Login code wrong',
         snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.redAccent,
+        backgroundColor: Colors.black,
         colorText: Colors.white,
         margin: const EdgeInsets.all(16),
       );
       return;
     }
 
-    Get.to(Exhibitordashboardscreen());
+    final authController = Get.find<AuthController>();
+    authController.setLoggedInUser('exhibitor');
+
+    Get.offAllNamed('/exhibitorHome');
   }
 
   @override
@@ -61,6 +64,12 @@ class _LoginCodeScreenState extends State<LoginCodeScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Get.offAllNamed('/home');
+          },
+          icon: Icon(Icons.home),
+        ),
         //title: const Text('Enter Login Code'),
         backgroundColor: orange,
         iconTheme: const IconThemeData(color: Colors.white),
@@ -134,7 +143,7 @@ class _LoginCodeScreenState extends State<LoginCodeScreen> {
                 ),
               ),
               keyboardType: TextInputType.number,
-              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+              //inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               onChanged: (value) {
                 setState(() {});
               },

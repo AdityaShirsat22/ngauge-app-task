@@ -119,7 +119,6 @@ class AuthService {
         queryParameters: {"EmailId": email.trim()},
       );
 
-      print("API RESPONSE: ${response.data}");
 
       final model = Exhibitormodel.fromJson(response.data);
 
@@ -129,7 +128,6 @@ class AuthService {
 
       return null;
     } catch (e) {
-      print("ERROR: $e");
       return null;
     }
   }

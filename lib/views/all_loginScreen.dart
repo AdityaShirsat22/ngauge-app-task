@@ -7,7 +7,7 @@ import 'package:n_gauge_apptask/views/Visitor/visitorLoginScreen.dart';
 import 'package:n_gauge_apptask/views/homeScreen.dart';
 
 class Loginscreen extends StatelessWidget {
-  Loginscreen({super.key});
+  const Loginscreen({super.key});
 
   @override
   Widget build(BuildContext context) {

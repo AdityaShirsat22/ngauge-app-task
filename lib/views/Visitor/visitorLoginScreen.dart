@@ -11,7 +11,7 @@ class Visitorloginscreen extends StatefulWidget {
 }
 
 class _VisitorloginscreenState extends State<Visitorloginscreen> {
-  final controller = Get.put(AuthController());
+  final controller = Get.find<AuthController>();
 
   var orange = Color.fromARGB(255, 255, 109, 24);
   var blue = const Color.fromARGB(255, 22, 41, 163);

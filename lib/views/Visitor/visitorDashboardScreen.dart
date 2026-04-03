@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:n_gauge_apptask/Controller/authController.dart';
 import 'package:n_gauge_apptask/views/Exhibitor/exhibitorListScreen.dart';
-import 'package:n_gauge_apptask/views/all_loginScreen.dart';
 
 class Visitordashboardscreen extends StatefulWidget {
   const Visitordashboardscreen({super.key});
@@ -12,10 +12,17 @@ class Visitordashboardscreen extends StatefulWidget {
 }
 
 class _ExhibitordashboardscreenState extends State<Visitordashboardscreen> {
+  final controller = Get.find<AuthController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Get.offAllNamed('/home');
+          },
+          icon: Icon(Icons.arrow_back),
+        ),
         title: Text("Visitor", style: TextStyle(color: Colors.white)),
         backgroundColor: orange,
       ),
@@ -150,6 +157,7 @@ class _ExhibitordashboardscreenState extends State<Visitordashboardscreen> {
                     child: ElevatedButton(
                       onPressed: () {
                         Get.offAllNamed("/login");
+                        controller.logout();
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.blue[800],

@@ -5,8 +5,11 @@ import 'package:n_gauge_apptask/Controller/authController.dart';
 import 'package:n_gauge_apptask/services/hiveservice.dart';
 import 'package:n_gauge_apptask/services/auth_service.dart';
 import 'package:n_gauge_apptask/views/Exhibitor/exhibitorDashboardScreen.dart';
+import 'package:n_gauge_apptask/views/Exhibitor/exhibitorProfileScreen.dart';
+import 'package:n_gauge_apptask/views/Exhibitor/exhibitorSettingScreen.dart';
 import 'package:n_gauge_apptask/views/Exhibitor/exibitor_details_screen.dart';
 import 'package:n_gauge_apptask/views/Visitor/visitorDashboardScreen.dart';
+import 'package:n_gauge_apptask/views/Visitor/visitorSettingScreen.dart';
 import 'package:n_gauge_apptask/views/homeScreen.dart';
 import 'package:n_gauge_apptask/views/all_loginScreen.dart';
 
@@ -41,6 +44,15 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: '/exhibitorDetails',
           page: () => ExhibitorDetailsScreen(),
+        ),
+        GetPage(
+          name: '/exhibitorsetting',
+          page: () => ExhibitorsettingScreen(),
+        ),
+        GetPage(name: '/visitorsetting', page: () => Visitorsettingscreen()),
+        GetPage(
+          name: '/exhibitorprofile',
+          page: () => Exhibitorprofilescreen(),
         ),
       ],
     );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:n_gauge_apptask/Controller/authController.dart';
 import 'package:n_gauge_apptask/views/Exhibitor/exhibitorListScreen.dart';
-import 'package:n_gauge_apptask/views/all_loginScreen.dart';
 
 class Exhibitordashboardscreen extends StatefulWidget {
   const Exhibitordashboardscreen({super.key});
@@ -12,12 +12,27 @@ class Exhibitordashboardscreen extends StatefulWidget {
 }
 
 class _ExhibitordashboardscreenState extends State<Exhibitordashboardscreen> {
+  final controller = Get.find<AuthController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Get.offAllNamed('/home');
+          },
+          icon: Icon(Icons.arrow_back),
+        ),
         title: Text("Back", style: TextStyle(color: Colors.white)),
         backgroundColor: orange,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Get.offAllNamed('/home');
+            },
+            icon: Icon(Icons.home),
+          ),
+        ],
       ),
       body: Padding(
         padding: EdgeInsetsGeometry.fromLTRB(20, 15, 20, 0),
@@ -149,6 +164,9 @@ class _ExhibitordashboardscreenState extends State<Exhibitordashboardscreen> {
                   SizedBox(height: 10),
                   Card(
                     child: ListTile(
+                      onTap: () {
+                        Get.toNamed('/exhibitorprofile');
+                      },
                       leading: Icon(Icons.person, color: Colors.blue[800]),
                       title: Text(
                         'View Profile',
@@ -158,13 +176,6 @@ class _ExhibitordashboardscreenState extends State<Exhibitordashboardscreen> {
                         ),
                       ),
                       trailing: Icon(Icons.arrow_forward_ios, size: 18),
-                      onTap: () {
-                        Get.snackbar(
-                          'Tap',
-                          'View Profile clicked',
-                          snackPosition: SnackPosition.BOTTOM,
-                        );
-                      },
                     ),
                   ),
                   const SizedBox(height: 20),
@@ -173,6 +184,7 @@ class _ExhibitordashboardscreenState extends State<Exhibitordashboardscreen> {
                     child: ElevatedButton(
                       onPressed: () {
                         Get.offAllNamed("/login");
+                        controller.logout();
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.blue[800],

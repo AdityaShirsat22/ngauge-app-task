@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
+import 'package:get/state_manager.dart';
 
 // ignore: must_be_immutable
 class Qrscreen extends StatelessWidget {
@@ -21,7 +23,9 @@ class Qrscreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 OutlinedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.offNamed('/exhibitorprofile');
+                  },
                   style: OutlinedButton.styleFrom(
                     backgroundColor: orange,
                     shape: RoundedRectangleBorder(

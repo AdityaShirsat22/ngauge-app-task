@@ -10,8 +10,10 @@ import '../../Controller/authController.dart';
 class ExhibitorDetailsScreen extends StatelessWidget {
   final controller = Get.find<AuthController>();
 
+  ExhibitorDetailsScreen({super.key});
+
   String _maskedEmail(String email) {
-    if (email.isEmpty) return '';
+    //if (email.isEmpty) return '';
     final lower = email.toUpperCase();
     final atIndex = lower.indexOf('@');
 
@@ -126,7 +128,7 @@ class ExhibitorDetailsScreen extends StatelessWidget {
                         height: 52,
                         child: ElevatedButton(
                           onPressed: () {
-                            Get.to(
+                            Get.offAll(
                               () =>
                                   LoginCodeScreen(email: data.stEmailId ?? ''),
                             );
