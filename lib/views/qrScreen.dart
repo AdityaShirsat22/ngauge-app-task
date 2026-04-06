@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:get/state_manager.dart';
+import 'package:n_gauge_apptask/views/all_loginScreen.dart';
+
+import '../Controller/authController.dart';
 
 // ignore: must_be_immutable
 class Qrscreen extends StatelessWidget {
@@ -24,7 +28,19 @@ class Qrscreen extends StatelessWidget {
               children: [
                 OutlinedButton(
                   onPressed: () {
-                    Get.offNamed('/exhibitorprofile');
+                    final authController = Get.find<AuthController>();
+                    if (authController.isLoggedIn()) {
+                      final role = authController.getRole();
+                      if (role == 'exhibitor') {
+                        Get.toNamed('/exhibitorprofile');
+                        return;
+                      }
+                      if (role == 'visitor') {
+                        Get.toNamed('/visitorProfile');
+                        return;
+                      }
+                    }
+                    Get.to(() => Loginscreen());
                   },
                   style: OutlinedButton.styleFrom(
                     backgroundColor: orange,

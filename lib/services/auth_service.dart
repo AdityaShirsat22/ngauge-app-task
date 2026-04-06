@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:n_gauge_apptask/models/exhibitorModel.dart';
+import 'package:n_gauge_apptask/models/visitorModel.dart';
 import '../api/dio_client.dart';
 import '../api/api_constants.dart';
 
@@ -119,7 +120,6 @@ class AuthService {
         queryParameters: {"EmailId": email.trim()},
       );
 
-
       final model = Exhibitormodel.fromJson(response.data);
 
       if (model.records != null && model.records!.isNotEmpty) {
@@ -128,6 +128,40 @@ class AuthService {
 
       return null;
     } catch (e) {
+      return null;
+    }
+  }
+
+  Future<VisitorRecord?> fetchVisitorDetails(
+    String userId,
+    String password,
+  ) async {
+    try {
+      final response = await _dio.post(
+        ApiConstants.visitorDetails,
+        queryParameters: {
+          "UserID": userId.trim(),
+          "password": password.trim(),
+          "DeviceId": "123456",
+          "blIOS": "false",
+        },
+      );
+
+      print('API Response: ${response.data}');
+      print('Response Code: ${response.statusCode}');
+
+      // Parse the response as a VisitorRecord directly (not wrapped in a model)
+      final visitorRecord = VisitorRecord.fromJson(response.data);
+
+      print('Parsed VisitorRecord - Email: ${visitorRecord.emailId}');
+
+      if (visitorRecord.emailId != null && visitorRecord.emailId!.isNotEmpty) {
+        return visitorRecord;
+      }
+
+      return null;
+    } catch (e) {
+      print('Error fetching visitor details: $e');
       return null;
     }
   }

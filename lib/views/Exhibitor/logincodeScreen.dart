@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:n_gauge_apptask/Controller/authController.dart';
 import 'package:pinput/pinput.dart';
@@ -46,6 +45,9 @@ class _LoginCodeScreenState extends State<LoginCodeScreen> {
 
     final authController = Get.find<AuthController>();
     authController.setLoggedInUser('exhibitor');
+    if (widget.email.isNotEmpty) {
+      authController.saveUserEmail(widget.email.trim());
+    }
 
     Get.offAllNamed('/exhibitorHome');
   }

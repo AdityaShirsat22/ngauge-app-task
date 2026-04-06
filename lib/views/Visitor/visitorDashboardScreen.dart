@@ -13,6 +13,7 @@ class Visitordashboardscreen extends StatefulWidget {
 
 class _ExhibitordashboardscreenState extends State<Visitordashboardscreen> {
   final controller = Get.find<AuthController>();
+  var orange = Color.fromARGB(255, 255, 109, 24);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,6 +26,14 @@ class _ExhibitordashboardscreenState extends State<Visitordashboardscreen> {
         ),
         title: Text("Visitor", style: TextStyle(color: Colors.white)),
         backgroundColor: orange,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Get.offAllNamed('/home');
+            },
+            icon: Icon(Icons.home),
+          ),
+        ],
       ),
       body: Padding(
         padding: EdgeInsetsGeometry.fromLTRB(20, 15, 20, 0),
@@ -142,12 +151,26 @@ class _ExhibitordashboardscreenState extends State<Visitordashboardscreen> {
                         ),
                       ),
                       trailing: Icon(Icons.arrow_forward_ios, size: 18),
-                      onTap: () {
-                        Get.snackbar(
-                          'Tap',
-                          'View Profile clicked',
-                          snackPosition: SnackPosition.BOTTOM,
+                      onTap: () async {
+                        final userId = controller.getUserEmail();
+                        if (userId == null || userId.isEmpty) {
+                          Get.snackbar(
+                            "Error",
+                            "No visitor ID found. Please login again.",
+                          );
+                          return;
+                        }
+
+                        bool success = await controller.getVisitorDetails(
+                          userId,
+                          
                         );
+
+                        if (success) {
+                          Get.toNamed('/visitorProfile');
+                        } else {
+                          Get.snackbar("Error", "Failed to load profile");
+                        }
                       },
                     ),
                   ),

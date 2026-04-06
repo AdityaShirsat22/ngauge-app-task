@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:n_gauge_apptask/views/Exhibitor/exhibitorListScreen.dart';
-import 'package:n_gauge_apptask/views/Exhibitor/exibitor_details_screen.dart';
 import '../../Controller/authController.dart';
 
-class Exhibitorprofilescreen extends StatelessWidget {
-  final exhibitorDetailsScreen = ExhibitorDetailsScreen();
-  Exhibitorprofilescreen({super.key});
+class VisitorProfileScreen extends StatelessWidget {
+  VisitorProfileScreen({super.key});
 
   final controller = Get.find<AuthController>();
 
   Widget _infoRow(String title, String value) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
-
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -24,9 +20,8 @@ class Exhibitorprofilescreen extends StatelessWidget {
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
             ),
           ),
-          //SizedBox(width: 20),
           SizedBox(
-            width: 230,
+            width: 250,
             child: Text(
               value,
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
@@ -34,18 +29,6 @@ class Exhibitorprofilescreen extends StatelessWidget {
           ),
         ],
       ),
-      // child: ListTile(
-      //   horizontalTitleGap: 20,
-      //   minTileHeight: 10,
-      //   leading: Text(
-      //     title,
-      //     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
-      //   ),
-      //   subtitle: Text(
-      //     value,
-      //     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
-      //   ),
-      // ),
     );
   }
 
@@ -58,10 +41,10 @@ class Exhibitorprofilescreen extends StatelessWidget {
           onPressed: () => Get.back(),
         ),
         title: Text('Back', style: TextStyle(color: Colors.white)),
-        backgroundColor: orange,
+        backgroundColor: Color.fromARGB(255, 255, 109, 24),
       ),
       body: Obx(() {
-        final data = controller.exhibitor.value;
+        final data = controller.visitor.value;
 
         if (data == null) {
           return Center(
@@ -72,13 +55,15 @@ class Exhibitorprofilescreen extends StatelessWidget {
           );
         }
 
-        final exhibitorBadgeNo = data.exhibitorBadgeNo ?? '';
-        final name = data.stName ?? '';
-        final company = data.stCompany ?? '';
-        final designation = data.stDesignation ?? '';
-        final mobile = data.stMobileNo ?? '';
-        final email = data.stEmailId ?? '';
-        final country = data.stcountry ?? '';
+        final visitorId = data.userId ?? '';
+        final fullName = '${data.firstName ?? ''} ${data.lastName ?? ''}'
+            .trim();
+        final organisation = data.organisation ?? '';
+        final designation = data.designation ?? '';
+        final mobile = data.mobileNo ?? '';
+        final email = data.emailId ?? '';
+        final city = data.city ?? '';
+        final country = data.country ?? '';
         final qrpath = data.qrPath;
 
         return SingleChildScrollView(
@@ -88,21 +73,24 @@ class Exhibitorprofilescreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 SizedBox(height: 10),
-                Image.network(qrpath!, height: 150, width: 150),
-
+                if (qrpath != null && qrpath.isNotEmpty)
+                  Image.network(qrpath, height: 150, width: 150)
+                else
+                  SizedBox(height: 150),
                 SizedBox(height: 30),
-
-                _infoRow("Exhibitor Badge No", exhibitorBadgeNo),
+                _infoRow("Visitor ID", visitorId),
                 Divider(),
-                _infoRow('Name', name),
+                _infoRow('Name', fullName),
                 Divider(),
-                _infoRow('Organization', company),
+                _infoRow('Organization', organisation),
                 Divider(),
                 _infoRow('Designation', designation),
                 Divider(),
                 _infoRow('Mobile', mobile),
                 Divider(),
                 _infoRow('Email', email),
+                Divider(),
+                _infoRow('City', city),
                 Divider(),
                 _infoRow('Country', country),
                 Divider(),

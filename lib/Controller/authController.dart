@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:n_gauge_apptask/models/exhibitorModel.dart';
+import 'package:n_gauge_apptask/models/visitorModel.dart';
 import 'package:n_gauge_apptask/services/hiveservice.dart';
 import '../services/auth_service.dart';
 
@@ -9,6 +9,7 @@ class AuthController extends GetxController {
   final AuthService _service = Get.find<AuthService>();
   final Hiveservice _hive = Get.find<Hiveservice>();
   var exhibitor = Rxn<Record>();
+  var visitor = Rxn<VisitorRecord>();
 
   var isLoading = false.obs;
 
@@ -23,6 +24,14 @@ class AuthController extends GetxController {
   void setLoggedInUser(String role) {
     _hive.saveRole(role);
     _hive.setLoggedIn(true);
+  }
+
+  void saveUserEmail(String email) {
+    _hive.saveUserEmail(email);
+  }
+
+  String? getUserEmail() {
+    return _hive.getUserEmail();
   }
 
   void logout() {
@@ -41,6 +50,11 @@ class AuthController extends GetxController {
       final isSuccess = code == 1 || code == "1" || code == true;
 
       if (isSuccess) {
+        print('Login successful, saving credentials...');
+        print('Saving userId: $user');
+        print('Saving password: $pass');
+        saveUserEmail(user.trim()); // Save userId for visitor
+        _hive.saveUserPassword(pass.trim()); // Save password for visitor
         setLoggedInUser('visitor');
         Get.snackbar("Success", "Login Successful");
         return true;
@@ -194,6 +208,32 @@ class AuthController extends GetxController {
     }
   }
 
+  //visitor details
+  Future<bool> getVisitorDetails(String userId) async {
+    try {
+      isLoading.value = true;
+      print('Fetching visitor details for userId: $userId');
+
+      final password = _hive.getUserPassword() ?? '';
+      print('Retrieved password from Hive: "$password"');
+      print('Password is empty: ${password.isEmpty}');
+
+      final data = await _service.fetchVisitorDetails(userId, password);
+
+      if (data != null) {
+        print('Visitor details fetched successfully');
+        visitor.value = data;
+        return true;
+      }
+
+      print('Visitor details returned null');
+      return false;
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  //
   //exhibitor details
   Future<bool> getExhibitorDetails(String email) async {
     try {

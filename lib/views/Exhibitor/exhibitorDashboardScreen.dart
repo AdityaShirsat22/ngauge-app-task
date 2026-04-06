@@ -164,8 +164,24 @@ class _ExhibitordashboardscreenState extends State<Exhibitordashboardscreen> {
                   SizedBox(height: 10),
                   Card(
                     child: ListTile(
-                      onTap: () {
-                        Get.toNamed('/exhibitorprofile');
+                      onTap: () async {
+                        final userEmail = controller.getUserEmail();
+                        if (userEmail == null || userEmail.isEmpty) {
+                          Get.snackbar(
+                            "Error",
+                            "No exhibitor email found. Please login again.",
+                          );
+                          return;
+                        }
+                        bool success = await controller.getExhibitorDetails(
+                          userEmail,
+                        );
+
+                        if (success) {
+                          Get.toNamed('/exhibitorprofile');
+                        } else {
+                          Get.snackbar("Error", "Failed to load profile");
+                        }
                       },
                       leading: Icon(Icons.person, color: Colors.blue[800]),
                       title: Text(

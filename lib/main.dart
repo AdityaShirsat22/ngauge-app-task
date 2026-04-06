@@ -9,6 +9,7 @@ import 'package:n_gauge_apptask/views/Exhibitor/exhibitorProfileScreen.dart';
 import 'package:n_gauge_apptask/views/Exhibitor/exhibitorSettingScreen.dart';
 import 'package:n_gauge_apptask/views/Exhibitor/exibitor_details_screen.dart';
 import 'package:n_gauge_apptask/views/Visitor/visitorDashboardScreen.dart';
+import 'package:n_gauge_apptask/views/Visitor/visitorProfileScreen.dart';
 import 'package:n_gauge_apptask/views/Visitor/visitorSettingScreen.dart';
 import 'package:n_gauge_apptask/views/homeScreen.dart';
 import 'package:n_gauge_apptask/views/all_loginScreen.dart';
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/login', page: () => Loginscreen()),
         GetPage(name: '/exhibitorHome', page: () => Exhibitordashboardscreen()),
         GetPage(name: '/visitorHome', page: () => Visitordashboardscreen()),
+        GetPage(name: '/visitorProfile', page: () => VisitorProfileScreen()),
         GetPage(
           name: '/exhibitorDetails',
           page: () => ExhibitorDetailsScreen(),
