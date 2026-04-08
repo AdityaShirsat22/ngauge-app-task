@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/route_manager.dart';
-import 'package:get/state_manager.dart';
+import 'package:n_gauge_apptask/qrScannerScreen.dart';
 import 'package:n_gauge_apptask/views/all_loginScreen.dart';
 
 import '../Controller/authController.dart';
@@ -69,7 +68,9 @@ class Qrscreen extends StatelessWidget {
             SizedBox(height: 100),
 
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Get.to(() => QrScannerScreen(type: "badge"));
+              },
               child: Column(
                 children: [
                   Container(
@@ -78,10 +79,7 @@ class Qrscreen extends StatelessWidget {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       gradient: LinearGradient(
-                        colors: [
-                          Color(0xFFFFC107), // yellow
-                          Color(0xFFFF5722), // orange
-                        ],
+                        colors: [Color(0xFFFFC107), Color(0xFFFF5722)],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),
@@ -101,7 +99,9 @@ class Qrscreen extends StatelessWidget {
             Divider(height: 40, thickness: 1),
             SizedBox(height: 20),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Get.to(() => QrScannerScreen(type: "stall"));
+              },
               child: Column(
                 children: [
                   Container(

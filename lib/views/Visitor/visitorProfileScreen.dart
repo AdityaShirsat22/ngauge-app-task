@@ -21,7 +21,7 @@ class VisitorProfileScreen extends StatelessWidget {
             ),
           ),
           SizedBox(
-            width: 250,
+            width: 260,
             child: Text(
               value,
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),

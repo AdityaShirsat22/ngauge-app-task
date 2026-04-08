@@ -199,8 +199,35 @@ class _ExhibitordashboardscreenState extends State<Exhibitordashboardscreen> {
                     height: 50,
                     child: ElevatedButton(
                       onPressed: () {
-                        Get.offAllNamed("/login");
-                        controller.logout();
+                        Get.defaultDialog(
+                          title: "logout",
+                          middleText: "Are you sure you want to logout",
+                          cancel: ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor: WidgetStatePropertyAll(blue),
+                            ),
+                            onPressed: () {
+                              Get.back();
+                            },
+                            child: Text(
+                              "No",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                          confirm: ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor: WidgetStatePropertyAll(green),
+                            ),
+                            onPressed: () {
+                              Get.offAllNamed('/home');
+                              controller.logout();
+                            },
+                            child: Text(
+                              "yes",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.blue[800],

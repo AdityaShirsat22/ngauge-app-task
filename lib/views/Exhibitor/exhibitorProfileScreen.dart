@@ -26,7 +26,7 @@ class Exhibitorprofilescreen extends StatelessWidget {
           ),
           //SizedBox(width: 20),
           SizedBox(
-            width: 230,
+            width: 250,
             child: Text(
               value,
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
