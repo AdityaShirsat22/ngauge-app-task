@@ -3,7 +3,7 @@ class ApiConstants {
       "https://exhibition.ngauge.co.in/ElecramaService.svc";
 
   static const String visitorLogin = "/GetVisitorLogin";
-  static const String visitorDetails = "/GetVisitorLogin";
+  //static const String visitorDetails = "/GetVisitorLogin";
   static const String exhibitorLogin = "/getExhibitorUserLoginDetails";
   static const String forgotPassword = "/UpdateVisitorPassword";
   static const String dbsmLogin = "/GetDBSMLogin";

@@ -50,11 +50,10 @@ class AuthController extends GetxController {
       final isSuccess = code == 1 || code == "1" || code == true;
 
       if (isSuccess) {
-        print('Login successful, saving credentials...');
-        print('Saving userId: $user');
-        print('Saving password: $pass');
-        saveUserEmail(user.trim()); // Save userId for visitor
-        _hive.saveUserPassword(pass.trim()); // Save password for visitor
+        // Save userId for visitor
+        saveUserEmail(user.trim());
+        // Save password for visitor
+        _hive.saveUserPassword(pass.trim());
         setLoggedInUser('visitor');
         Get.snackbar("Success", "Login Successful");
         return true;
@@ -212,28 +211,22 @@ class AuthController extends GetxController {
   Future<bool> getVisitorDetails(String userId) async {
     try {
       isLoading.value = true;
-      print('Fetching visitor details for userId: $userId');
 
       final password = _hive.getUserPassword() ?? '';
-      print('Retrieved password from Hive: "$password"');
-      print('Password is empty: ${password.isEmpty}');
 
       final data = await _service.fetchVisitorDetails(userId, password);
 
       if (data != null) {
-        print('Visitor details fetched successfully');
         visitor.value = data;
         return true;
       }
 
-      print('Visitor details returned null');
       return false;
     } finally {
       isLoading.value = false;
     }
   }
 
-  //
   //exhibitor details
   Future<bool> getExhibitorDetails(String email) async {
     try {

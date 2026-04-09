@@ -138,7 +138,7 @@ class AuthService {
   ) async {
     try {
       final response = await _dio.post(
-        ApiConstants.visitorDetails,
+        ApiConstants.visitorLogin,
         queryParameters: {
           "UserID": userId.trim(),
           "password": password.trim(),

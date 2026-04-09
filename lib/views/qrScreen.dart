@@ -69,7 +69,15 @@ class Qrscreen extends StatelessWidget {
 
             InkWell(
               onTap: () {
-                Get.to(() => QrScannerScreen(type: "badge"));
+                final authController = Get.find<AuthController>();
+                if (authController.isLoggedIn()) {
+                  final role = authController.getRole();
+                  if (role == 'exhibitor' || role == 'visitor') {
+                    Get.to(QrScannerScreen(type: "badge"));
+                    return;
+                  }
+                }
+                Get.to(() => Loginscreen());
               },
               child: Column(
                 children: [
@@ -100,7 +108,15 @@ class Qrscreen extends StatelessWidget {
             SizedBox(height: 20),
             InkWell(
               onTap: () {
-                Get.to(() => QrScannerScreen(type: "stall"));
+                final authController = Get.find<AuthController>();
+                if (authController.isLoggedIn()) {
+                  final role = authController.getRole();
+                  if (role == 'exhibitor' || role == 'visitor') {
+                    Get.to(QrScannerScreen(type: "stall"));
+                    return;
+                  }
+                }
+                Get.to(() => Loginscreen());
               },
               child: Column(
                 children: [
